@@ -1,16 +1,24 @@
-import React from 'react'
-import './login.css'
+import React from 'react';
+import './login.css';
+import {Link} from 'react-router-dom';
+
+const Submit = () => {
+    window.location.href='/home';
+    // window.location.replace('http://localhost:3000/')
+}
+
 const Login = () => {
-    return (
+    return (     
         <div className="container">
-            <div className="box">
-                LOGIN!<br/><br/><br/>
-                <input type="text" placeholder="Enter Username"/><br/>
-                <input type="password" placeholder="Enter Password"/><br/>
+            <div className="login_box">
+                LOGIN!<br/><br/>
+                <input className="login_input" type="text" placeholder="Enter Username" /><br/>
+                <input className="login_input" type="password" placeholder="Enter Password"/><br/>
                 <input id="remember" type="checkbox"/> 
-                <label for="remember">  &nbsp;&nbsp;Remember me</label>
+                <label for="remember">  Remember me</label>
                 <br/>    <br/>
-                <button className="loginbutton">LOGIN!</button>
+                <button className="loginbutton" onClick={Submit}>LOGIN!</button><br />
+                <p style={{marginTop:"15px"}}>New User ?? <Link to="Signup" >Click here</Link></p>
             </div>
         </div>
     )

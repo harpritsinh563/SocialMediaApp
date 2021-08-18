@@ -17,7 +17,7 @@ const Navbar = () => {
     
            <ul>
                 <li>About</li>
-                <li>Contact</li>
+                <li>Contact</li>    
                 <li>Logout</li>
             </ul>
         </div>

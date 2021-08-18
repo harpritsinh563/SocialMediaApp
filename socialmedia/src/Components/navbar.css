@@ -3,8 +3,8 @@
   padding: 0;
 }
 .navbar {
-    position: sticky;
-    top: 2px;
+  position: sticky;
+  top: 2px;
   display: flex;
   width: 100vw;
   height: 8vh;
@@ -15,8 +15,17 @@
   justify-content: space-between;
   align-items: center;
 }
+.navright{
+  flex:1;
+}
+.navleft{
+  flex: 6;
+}
+.navcenter{
+  flex: 11;
+}
 .left {
-  margin-left: 9px;
+  margin-left: 10vw;
 }
 
 .left:hover {
@@ -29,7 +38,8 @@
   letter-spacing: 2px;
   color:white;
   font-size : 1.2em; 
-                                                
+       
+  margin-left: 10vw;                                         
 }
 .title:hover
 {
@@ -67,7 +77,91 @@ li:hover {
 }
 
 .grad {
-    background-image: linear-gradient(red, yellow);
-    width: 100vw;
-    height: 100vh;
-  }
+  background-image: linear-gradient(red, yellow);
+  width: 100vw;
+  height: 100vh;
+}
+
+.nav_img {
+  width: 3rem;
+  height: 2.5rem;
+  margin-right: 2%;
+  margin-right: 2rem; 
+  border-radius: 50%;
+  cursor: pointer;
+
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position:absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.dropdown-content a {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  font-size: medium;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.input_search
+{
+  padding: .5vw;
+  margin-top: 5px;
+  width: 30vw;
+  margin-right: 5px;
+  border: none;
+}
+.btn_search{
+  padding: 5px;
+  background-color: white;
+  border: none;
+}
+.input_search:focus{
+  outline:none;
+  border:none;
+}
+
+
+
+.cards{
+  width: 30vw;
+  height: 30vh;
+  display: inline-block;
+  justify-content: center;
+  text-align: center;
+  top:0;
+  bottom: 0;
+  left: 33%;
+  right: 0;
+  padding: 2%;
+  margin: auto;
+  position: relative;
+
+}
+
+.card_img{
+  width: 100%;
+  border-radius: 2vw;
+}
+
+.facility_div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.facility_icon{
+  font-size: 2rem;
+  margin-left: 10px;
+}
