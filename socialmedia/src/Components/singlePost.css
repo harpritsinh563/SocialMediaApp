@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.Img{
+    width: 14vw;
+    height: 14vw;
+    margin-bottom: 4%;
+    margin-top: 14%;
+    object-fit: cover;
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.bottomProfile{
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: 16vw 16vw 16vw;
+    width: 50vw;
+    padding-bottom: 4%;
+    margin-left: 5%;
+}
+

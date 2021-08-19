@@ -4,7 +4,7 @@
 }
 .navbar {
   position: sticky;
-  top: 2px;
+  top: 0px;
   display: flex;
   width: 100vw;
   height: 8vh;
@@ -93,15 +93,18 @@ li:hover {
 }
 
 .dropdown {
+  margin-right: 3.5vw;
   position: relative;
   display: inline-block;
 }
 .dropdown-content {
   display: none;
+  /* flex-direction: column; */
   position:absolute;
   background-color: #f9f9f9;
   min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  /* border: red; */
 }
 .dropdown-content a {
   color: black;
@@ -109,10 +112,14 @@ li:hover {
   text-decoration: none;
   display: block;
   font-size: medium;
+  /* border: red; */
 }
 .dropdown:hover .dropdown-content {
   display: block;
+  /* min-width: fit-content; */
+  border-radius: .5vw;  
 }
+
 
 .input_search
 {
@@ -130,38 +137,4 @@ li:hover {
 .input_search:focus{
   outline:none;
   border:none;
-}
-
-
-
-.cards{
-  width: 30vw;
-  height: 30vh;
-  display: inline-block;
-  justify-content: center;
-  text-align: center;
-  top:0;
-  bottom: 0;
-  left: 33%;
-  right: 0;
-  padding: 2%;
-  margin: auto;
-  position: relative;
-
-}
-
-.card_img{
-  width: 100%;
-  border-radius: 2vw;
-}
-
-.facility_div{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.facility_icon{
-  font-size: 2rem;
-  margin-left: 10px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './login.css';
 import {Link} from 'react-router-dom';
+import Navbar from './Navbar';
 
 const Submit = () => {
     window.location.href='/home';
@@ -9,6 +10,8 @@ const Submit = () => {
 
 const Login = () => {
     return (     
+        <>
+        <Navbar/>
         <div className="container">
             <div className="login_box">
                 LOGIN!<br/><br/>
@@ -21,6 +24,7 @@ const Login = () => {
                 <p style={{marginTop:"15px"}}>New User ?? <Link to="Signup" >Click here</Link></p>
             </div>
         </div>
+        </>
     )
 }
 

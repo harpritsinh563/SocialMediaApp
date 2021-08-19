@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  width: 100vw;
+  height: 8vh;
+  z-index: 3;
+  font-size: larger;
+  background-color: #50aeee;
+  color: black;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navright {
+  flex: 1;
+}
+
+.navleft {
+  flex: 6;
+}
+.navcenter {
+  flex: 11;
+}
+
+.logo{
+    float: left;
+    margin-left: 3vh ;
+}
+
+.title {
+  font-family: "Calligraffitti", cursive;
+  font-family: "Lobster Two", cursive;
+  letter-spacing: 2px;
+  color: white;
+  font-size: 1.2em;
+  float: left;
+  margin-left: 2vw;
+  margin-top: 7px;
+}
+.title:hover {
+  font-size: x-large;
+}
+
+.fa-speakap {
+  margin-left: 1vw;
+  color: white;
+}
+
+.nav_img {
+  width: 3rem;
+  height: 2.5rem;
+  margin-right: 2%;
+  margin-right: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown {
+  margin-right: 3.5vw;
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  /* flex-direction: column; */
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  /* border: red; */
+}
+.dropdown-content a {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  font-size: medium;
+  /* border: red; */
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  /* min-width: fit-content; */
+  border-radius: 0.5vw;
+}
+
+.input_search {
+  padding: 0.5vw;
+  margin-top: 5px;
+  width: 30vw;
+  margin-right: 5px;
+  border: none;
+}
+.btn_search {
+  padding: 5px;
+  background-color: white;
+  border: none;
+}
+.input_search:focus {
+  outline: none;
+  border: none;
+}
+

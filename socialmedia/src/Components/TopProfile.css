@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.topProfile{
+    /* position: sticky; */
+    margin-top: 4%;
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    padding-bottom: 2%;
+    border-bottom: 1px solid grey;
+    width: 50vw;
+    padding-bottom: 4%;
+}
+
+.profilepic{
+    margin-top: 2%;
+    padding: 1.5%;
+    height: 20vh;
+    width: 10vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.editIcon{
+    margin-left: 0.7vw;
+    cursor: pointer;
+    font: bold 2.5vh/1vh 'Roboto Mono', serif;
+}
+
+.icon:hover{
+    color: #50aeee;
+}
+
+.profilepic:hover{
+    box-shadow: 3px 2px  #50aeee;
+}
+
+.together{
+    display: flex;
+}
+
+.uname{
+    margin-left: 3vw;
+    font-size: x-large;
+    margin-bottom: 3vh;
+    font: bold 3vh/3vh 'Roboto Mono', serif;
+}
+
+.details{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+.tittle{
+    margin-left: 3vw;
+}

@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.cards{
+    width: 30vw;
+    height: 30vh;
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+    top:0;
+    bottom: 0;
+    left: 33%;
+    right: 0;
+    padding: 2%;
+    margin: auto;
+    position: relative;
+  }
+  
+  .card_img{
+    width: 100%;
+    border-radius: 2vw;
+  }
+  
+  .facility_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .facility_icon{
+    font-size: 2rem;
+    margin-left: 10px;
+  }
+  

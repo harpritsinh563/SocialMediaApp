@@ -3,15 +3,18 @@ import './signup.css';
 import Login from './Login';
 import { Link } from "react-router-dom";
 import { browserHistory } from 'react-router';
+import Navbar from './Navbar';
 
 const Submit = () => {
-    window.location.href='/'
+    window.location.href='/home';
     // window.location.replace('http://localhost:3000/')
 }
 
 
 const Signup = () => {
     return(
+        <>
+        <Navbar/>
         <div className="container">
             <div className="box">
                 Signup!<br/><br/><br/>
@@ -29,6 +32,7 @@ const Signup = () => {
                 Already a User ? <Link to="/">Click here</Link>
             </div>
         </div>
+        </>
     );
 }
 
