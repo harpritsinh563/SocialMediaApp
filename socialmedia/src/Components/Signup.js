@@ -27,6 +27,7 @@ const Signup = () => {
                 <label for="Female">Female</label><br/>
                 <input type="text" placeholder="Enter Username"/><br/>
                 <input type="password" placeholder="Enter Password"/>
+                <input type="password" placeholder="Confirm Password"/>
                 <br/>    <br/>
                 <button className="signupbutton" onClick={Submit} >Signup!</button><br /><br />
                 Already a User ? <Link to="/">Click here</Link>

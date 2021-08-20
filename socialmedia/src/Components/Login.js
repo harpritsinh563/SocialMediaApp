@@ -13,13 +13,12 @@ const Login = () => {
         <>
         <Navbar/>
         <div className="container">
-            <div className="login_box">
-                LOGIN!<br/><br/>
+            <div className="login_box">LOGIN!<br/><br/>
                 <input className="login_input" type="text" placeholder="Enter Username" /><br/>
                 <input className="login_input" type="password" placeholder="Enter Password"/><br/>
                 <input id="remember" type="checkbox"/> 
-                <label for="remember">  Remember me</label>
-                <br/>    <br/>
+                <label for="remember">Remember me</label>
+                <br/><br/>
                 <button className="loginbutton" onClick={Submit}>LOGIN!</button><br />
                 <p style={{marginTop:"15px"}}>New User ?? <Link to="Signup" >Click here</Link></p>
             </div>

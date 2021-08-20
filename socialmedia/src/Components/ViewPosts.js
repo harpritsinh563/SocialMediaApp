@@ -11,9 +11,6 @@ const ViewPosts = () => {
                 Liked
             </div>
             <PrintPosts/>
-            
-
-          
         </div>
         </>
     )
