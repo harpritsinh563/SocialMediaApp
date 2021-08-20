@@ -58,3 +58,11 @@
 .tittle{
     margin-left: 3vw;
 }
+ .friends{
+    cursor: pointer;
+
+ }
+  
+.friends:hover{
+    color: #50aeee;
+} 

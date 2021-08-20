@@ -7,7 +7,7 @@
   position: sticky;
   top: 0px;
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 8vh;
   z-index: 3;
   font-size: larger;
@@ -106,3 +106,8 @@
   border: none;
 }
 
+.itemHover:hover {
+  background-color: gray;
+  color: white;
+
+}

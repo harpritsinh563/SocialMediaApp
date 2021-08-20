@@ -1,0 +1,38 @@
+.Friends{
+    /* overflow-y:scroll; */
+    /* height: 70vh; */
+    cursor: pointer;
+    
+    width: 35vw;
+    background-color: white;
+    border-radius: 1.5vw;
+    margin-right: 2%;
+    display: flex;
+    flex-direction: column; 
+    margin-top: 2%;  
+    overflow: hidden; 
+}
+
+
+.Container{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding-top: 2%;
+}
+
+.title_Friend{
+    font-size: xx-large;
+    letter-spacing: 2px;
+
+    color: black;
+    border-bottom: 1px solid grey;
+    text-transform: uppercase;
+    font-family: 'Mulish';
+    /* padding-bottom: 2%; */
+
+}
+.title_Friend::first-letter{
+    font-size: 180%;
+}

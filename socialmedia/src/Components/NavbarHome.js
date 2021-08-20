@@ -25,8 +25,9 @@ const Home = () => {
                     src="https://images.unsplash.com/photo-1622698639855-fda2a55e0cbe?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
                 </img>
                         <div className="dropdown-content">
-                            <Link to="/userProfile" > Profile  </Link> 
-                            <a href="#"> Saved </a>
+                            <Link className = 'link itemHover'  to="/userProfile" > Profile  </Link> 
+                            <Link className = 'link itemHover' to="/viewPosts" > Saved  </Link>
+                             
                             <a href="#"> Settings </a>
                             <hr/>
                             <a href="#"> Log-outttt</a>

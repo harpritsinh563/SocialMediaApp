@@ -1,0 +1,9 @@
+.ViewPosts{
+    flex-direction: column;
+    margin: 2% auto;
+    height: 70vh;
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

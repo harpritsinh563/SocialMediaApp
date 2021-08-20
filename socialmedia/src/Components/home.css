@@ -25,12 +25,14 @@
   
   .facility_div{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+
   }
   
   .facility_icon{
     font-size: 2rem;
     margin-left: 10px;
+    margin-top: 1.5vh;
   }
   
