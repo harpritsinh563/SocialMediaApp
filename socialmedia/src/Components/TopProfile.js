@@ -16,6 +16,9 @@ const TopProfile = () => {
                                 <Tooltip title="Edit info">
                                     <i  className="far fa-user-edit icon"></i> 
                                 </Tooltip>
+                                <Tooltip title="Add Friend">
+                                    <i className="far fa-user-plus icon_add"> </i> 
+                                </Tooltip>
                         </span> 
                         </Link>
                     </div>

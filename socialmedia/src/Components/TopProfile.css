@@ -25,12 +25,19 @@
 }
 
 .editIcon{
-    margin-left: 0.7vw;
+    margin-left: 1.1vw;
     cursor: pointer;
     font: bold 2.5vh/1vh 'Roboto Mono', serif;
 }
 
 .icon:hover{
+    color: #50aeee;
+}
+
+.icon_add{
+    margin-left: 1.1vw;
+}
+.icon_add:hover{
     color: #50aeee;
 }
 
