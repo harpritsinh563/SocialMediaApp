@@ -4,10 +4,11 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const userRoute = require("./Routes/user.js")
 const authRoute = require("./Routes/auth.js")
+const postRoute = require("./Routes/post.js")
+
 dotenv.config()
-app.listen("5000",()=>
-{
-    console.log("Backend running")
+app.listen("5000", () => {
+  console.log("Backend running")
 })
 app.use(express.json())
 mongoose.connect(process.env.MONGO_URL, {
@@ -15,9 +16,10 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true
-},()=>{
-    console.log("DATABASE CONNECTED")
+}, () => {
+  console.log("DATABASE CONNECTED")
 });
 
-app.use("/api/user",userRoute);
-app.use("/api/auth",authRoute);
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/post", postRoute);
