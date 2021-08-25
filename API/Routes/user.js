@@ -44,12 +44,34 @@ router.put("/:id/addFriend",async(req,res)=>{
     try{
         const user = await User.updateOne({$push:{friends:req.params.id}})
         const updateduser = await User.findByIdAndUpdate(req.params.id,{
-            $push:{friends:"vrundan"}
+            $push:{friends:req.body.userId}
         },{new:true})
         res.status(200).json(user)
     }
     catch{
         res.status(403).send("ERROR");
+    }
+})
+
+router.put("/:id/savedPost",async(req,res)=>{
+    try{
+        const user = await User.findById(req.body.userId)
+        if(user.savedposts.includes(req.params.id))
+        {
+            await user.updateOne({
+                $pull:{savedposts:req.params.id}
+            })
+        }
+        else{
+            await user.updateOne({
+                $push:{savedposts:req.params.id}
+            })
+        }
+        const updatedUser = await User.findById(req.body.userId)
+        res.status(200).json(updatedUser)
+    }
+    catch(err){
+        res.status(403).send(err.message)
     }
 })
 

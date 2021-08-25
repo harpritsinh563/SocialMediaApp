@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Post = require("../Models/Post")
-
+const User = require("../Models/User")
 /*
      post -> send data 
     put -> update data
@@ -63,4 +63,38 @@ router.get("/",async (req,res)=>{
         res.status(403).send("Error displaying your Post")
     }
 })
+
+router.put("/:id/likepost",async(req,res)=>
+{
+    try{
+        const post = await Post.findById(req.params.id)
+        let likes = post.likeCount
+        const user = await User.findById(req.body.userId)
+        if(post.likedBy.includes(req.body.userId))
+        {
+            await post.updateOne({
+                $pull:{likedBy:req.body.userId},likeCount:likes - 1
+
+            }) 
+            await user.updateOne({
+                $pull:{likedposts:req.params.id}
+            })           
+        } 
+        else{
+            await post.updateOne({
+                $push:{likedBy:req.body.userId},likeCount:likes + 1
+            })
+            await user.updateOne({
+                $push:{likedposts:req.params.id}
+            })
+        }
+        const updatedPost = await Post.findById(req.params.id)
+
+        res.status(200).json(updatedPost)   
+    }
+    catch(err){
+        res.status(403).send(err.message)
+    }
+})
+
 module.exports = router
