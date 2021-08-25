@@ -28,6 +28,12 @@ router.post("/addPost",async(req,res)=>{
             userName: req.body.userName,
         })
         const post = await newPost.save()
+        const user = await User.findOne({userName : req.body.userName})
+        const currentpostCount = user.postCount
+        await user.updateOne({
+            $push: {posts: post._id},
+            postCount : currentpostCount + 1 
+        })
         res.status(200).json(post)
     }catch(err){
         res.status(403).send("Error updating your Post")
@@ -37,6 +43,12 @@ router.post("/addPost",async(req,res)=>{
 router.delete("/:id",async(req,res)=>{
     try{
         const post = await Post.findByIdAndDelete(req.params.id)
+        const user = await User.findOne({userName : req.body.userName})
+        const currentpostCount = user.postCount
+        await user.updateOne({
+            $pull: {posts: req.params.id},
+            postCount : currentpostCount - 1 
+        })
         res.status(200).send("Post Deleted successfully");
     }catch(err){
         res.status(403).send("Error deleting your Post")
@@ -52,13 +64,11 @@ router.get("/:id",async (req,res)=>{
     }
 })
 
-router.get("/",async (req,res)=>{
+router.get("/:id/allposts",async (req,res)=>{
     try{
-        const userName = req.query.userName
-        let post = await Post.find({
-            userName: userName
-        })
-        res.status(200).json(post)
+        const user = await User.findById(req.params.id);
+        const posts = user.posts
+        res.status(200).json(posts)
     }catch(err){
         res.status(403).send("Error displaying your Post")
     }

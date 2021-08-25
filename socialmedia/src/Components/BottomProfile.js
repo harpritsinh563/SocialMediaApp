@@ -2,19 +2,13 @@ import React from 'react'
 import SinglePost from './SinglePost'
 import "./BottomProfile.css";
 
-const BottomProfile = () => {
+const BottomProfile = ({bottomProfile}) => {
     return (
         <>
         <div className="bottomProfile">
-            
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
-            <SinglePost/>
+        {bottomProfile.map((p)=>(
+                <SinglePost post={p} />
+            ))}
         </div>
         </>
     )

@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    username:
+    userName:
     {
         type:String,
         required:true,
@@ -55,6 +55,21 @@ const userSchema = new mongoose.Schema({
     {
         type : Array,
         default:[]
+    },
+    posts : 
+    {
+        type : Array,
+        default : []
+    },
+    postCount : 
+    {
+        type : Number,
+        default : 0
+    },
+    friendCount : 
+    {
+        type : Number,
+        default : 0
     }
 },{timestamps:true});
 

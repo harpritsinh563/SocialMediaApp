@@ -10,13 +10,14 @@ router.post("/register",async(req,res)=>{
         const salt = await bcrypt.genSalt(13);
         const hashedpass = await bcrypt.hash(req.body.password,salt);
         const newUser =  new User({
-            username : req.body.username,
+            userName : req.body.userName,
             password : hashedpass,
             email : req.body.email,
             age : req.body.age,
             name : req.body.name,
             contact : req.body.contact,
-            gender : req.body.gender
+            gender : req.body.gender,
+            profilepic : req.body.profilepic
         });
         const user = await newUser.save();
         res.status(200).json(user);
@@ -29,7 +30,7 @@ router.post("/register",async(req,res)=>{
 router.post("/login",async(req,res)=>{
     try
     {
-        const user = await User.findOne({username : req.body.username});
+        const user = await User.findOne({userName : req.body.userName});
         const comparepass = await bcrypt.compare(req.body.password,user.password);
         !comparepass && res.status(403).json("WRONG PASSWORD");
         res.status(200).json(user);

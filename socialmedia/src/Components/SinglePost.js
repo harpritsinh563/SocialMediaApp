@@ -1,11 +1,30 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import './singlePost.css'
+import axios from 'axios'
 
-const SinglePost = () => {
+const SinglePost = ({post}) => {
+    const [currentpost,setCurrentPost]=useState({});
+    useEffect(()=>
+    {
+        const fetchPost = async() => 
+        {
+            try
+            {
+                const fetchedpost = await axios.get(`/post/${post}`);
+                console.log(fetchedpost);
+                setCurrentPost(fetchedpost.data);
+            }
+            catch(err)
+            {
+
+            }
+        }
+        fetchPost();
+    },[])
+
     return (
         <>
-        
-            <img className="Img"  src="https://picsum.photos/180"></img>
+            <img className="Img"  src={currentpost.photo}></img>
         </>    
     )
 }

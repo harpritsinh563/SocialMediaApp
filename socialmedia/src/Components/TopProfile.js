@@ -3,14 +3,13 @@ import './TopProfile.css'
 import {Tooltip} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
-const TopProfile = () => {
+const TopProfile = ({topProfile}) => {
     return (
         <>
             <div className="topProfile">
-                <img className="profilepic" src="https://picsum.photos/200/300 " alt=" " />
-                
+                <img className="profilepic" src={topProfile.photo} alt=" " />
                 <div className="details">
-                    <div className="uname">Jainil_92
+                    <div className="uname">{topProfile.userName}
                         <Link to='/editProfile'>
                         <span className="editIcon">
                                 <Tooltip title="Edit info">
@@ -23,11 +22,10 @@ const TopProfile = () => {
                         </Link>
                     </div>
                     
-                    
                     <div className="together">
-                        <div className="tittle">7 Posts</div>
+                        <div className="tittle">{topProfile.postCount} Posts</div>
                         <div className="tittle friends">
-                            <Link className = 'link' to = '/userFriends'>420 Frandz</Link> 
+                            <Link className = 'link' to = '/userFriends'>{topProfile.friendsCount} Frandz</Link> 
                         </div>
                     </div>
                 </div>

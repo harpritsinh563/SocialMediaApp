@@ -41,10 +41,15 @@ router.get("/:id",async(req,res)=>{
 })
 
 router.put("/:id/addFriend",async(req,res)=>{
-    try{
-        const user = await User.updateOne({$push:{friends:req.params.id}})
-        const updateduser = await User.findByIdAndUpdate(req.params.id,{
-            $push:{friends:req.body.userId}
+    try{        
+        const user = await User.findById(req.params.id);
+        const currentFriendcount = user.friendCount;
+        await user.updateOne({$push:{friends:req.params.id},friendCount : currentFriendcount + 1})
+        const otheruser = await User.findById(req.body.userId);
+        const otheruserFriends = otheruser.friendCount
+        await otheruser.findByIdAndUpdate(req.params.id,{
+            $push:{friends:req.body.userId},
+            friendCount : otheruserFriends+1
         },{new:true})
         res.status(200).json(user)
     }
@@ -74,5 +79,4 @@ router.put("/:id/savedPost",async(req,res)=>{
         res.status(403).send(err.message)
     }
 })
-
 module.exports = router
