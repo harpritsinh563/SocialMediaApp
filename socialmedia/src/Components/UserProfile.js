@@ -8,7 +8,8 @@ import axios from 'axios'
 export const UserProfile = () => {
   const [profileInfo,setprofileInfo]=useState({});
   const [bottomposts,setBottomPosts]=useState([]);
-  const currentid="6125e700dc75a24a44183340"
+  const currentid="61275e11f0201774782ba0cd"
+  
   useEffect(()=>{
     const fetchProfile = async() =>
     {
@@ -36,8 +37,9 @@ export const UserProfile = () => {
     <>
       <NavbarHome />
        <div className="userProfileInfo">
-       <TopProfile topProfile={topProfile} />
+        <TopProfile topProfile={topProfile} />
         <BottomProfile bottomProfile={bottomposts} />
+
       </div>
     </>
   )

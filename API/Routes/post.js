@@ -26,6 +26,7 @@ router.post("/addPost",async(req,res)=>{
             photo: req.body.photo,
             caption: req.body.caption,
             userName: req.body.userName,
+            userId: req.body.userId
         })
         const post = await newPost.save()
         const user = await User.findOne({userName : req.body.userName})
@@ -66,13 +67,35 @@ router.get("/:id",async (req,res)=>{
 
 router.get("/:id/allposts",async (req,res)=>{
     try{
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id)
         const posts = user.posts
         res.status(200).json(posts)
     }catch(err){
         res.status(403).send("Error displaying your Post")
     }
 })
+
+router.get("/:id/feedPosts",async(req,res)=>{
+    try{
+        const user = await User.findById(req.params.id)
+        const friends = user.friends
+        let posts=[]
+        const allPosts = await Promise.all(
+            friends.map(async(f)=>{
+                const currPost = await Post.find({userId:f})
+                let tmp_post = posts.concat(currPost) 
+                posts = tmp_post
+            })
+        )
+        // console.log(posts)
+        res.status(200).json(posts)
+    }catch(err){
+        res.status(403).send("Error displaying your Post")
+    }
+})
+
+
+
 
 router.put("/:id/likepost",async(req,res)=>
 {

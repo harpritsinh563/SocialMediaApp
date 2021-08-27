@@ -24,7 +24,7 @@ router.post("/register",async(req,res)=>{
     }
     catch(err)
     {
-        res.status(403).send("Something went wrong");
+        res.status(403).send(err.message);
     }
 })
 router.post("/login",async(req,res)=>{

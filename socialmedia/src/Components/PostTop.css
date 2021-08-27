@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.top{
+    width:100%;
+    padding:4%;
+}
+
+.postTopPropic{
+    height: 7.2vh;
+    width: 4.2vw;
+    border-radius: 50%;
+    margin-top: 5%;
+    margin-right: 3%;
+    object-fit: cover;
+}
+

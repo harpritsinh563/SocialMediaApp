@@ -44,17 +44,17 @@ router.put("/:id/addFriend",async(req,res)=>{
     try{        
         const user = await User.findById(req.params.id);
         const currentFriendcount = user.friendCount;
-        await user.updateOne({$push:{friends:req.params.id},friendCount : currentFriendcount + 1})
+        await user.updateOne({$push:{friends:req.body.userId},friendCount : currentFriendcount + 1})
         const otheruser = await User.findById(req.body.userId);
         const otheruserFriends = otheruser.friendCount
-        await otheruser.findByIdAndUpdate(req.params.id,{
-            $push:{friends:req.body.userId},
+        await otheruser.updateOne({
+            $push:{friends:req.params.id},
             friendCount : otheruserFriends+1
-        },{new:true})
+        })
         res.status(200).json(user)
     }
     catch{
-        res.status(403).send("ERROR");
+        res.status(403).send(err.message);
     }
 })
 

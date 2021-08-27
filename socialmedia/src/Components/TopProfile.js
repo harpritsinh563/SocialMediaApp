@@ -25,7 +25,7 @@ const TopProfile = ({topProfile}) => {
                     <div className="together">
                         <div className="tittle">{topProfile.postCount} Posts</div>
                         <div className="tittle friends">
-                            <Link className = 'link' to = '/userFriends'>{topProfile.friendsCount} Frandz</Link> 
+                            <Link className = 'link' to = '/userFriends'>{topProfile.friendsCount} Friends</Link> 
                         </div>
                     </div>
                 </div>

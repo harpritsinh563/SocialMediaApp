@@ -12,9 +12,7 @@ import  UserFriends from './Components/UserFriends.js';
 function App() {
   return (
     <>
-    <withRouter>
       <BrowserRouter>
-        {/*<Navbar/> */}
         <Switch>
           <Route exact path='/' component={Login} ></Route>
           <Route path='/Signup' component={Signup}></Route>
@@ -23,12 +21,8 @@ function App() {
           <Route path="/editProfile" component = {EditProfile}></Route>
           <Route path="/viewPosts" component = {ViewPosts}></Route>
           <Route path="/userFriends" component = {UserFriends}></Route>
-
         </Switch>
-        {/* <NavbarHome /> */}
-        {/* <Home /> */}
       </BrowserRouter>
-      </withRouter>
     </>
   );
 }

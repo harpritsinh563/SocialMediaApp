@@ -6,7 +6,7 @@ const BottomProfile = ({bottomProfile}) => {
     return (
         <>
         <div className="bottomProfile">
-        {bottomProfile.map((p)=>(
+        {!bottomProfile && bottomProfile.map((p)=>(
                 <SinglePost post={p} />
             ))}
         </div>
