@@ -8,6 +8,7 @@ import axios from 'axios'
 export const UserProfile = () => {
   const [profileInfo,setprofileInfo]=useState({});
   const [bottomposts,setBottomPosts]=useState([]);
+  
   const currentid="61275e11f0201774782ba0cd"
   
   useEffect(()=>{
@@ -26,6 +27,7 @@ export const UserProfile = () => {
     }
     fetchProfile();
   },[])
+
   const topProfile = {
     userName : profileInfo.userName,
     friends :  profileInfo.friends,
@@ -33,13 +35,13 @@ export const UserProfile = () => {
     photo : profileInfo.profilepic,
     friendsCount : profileInfo.friendCount
   }
+  
   return (
     <>
       <NavbarHome />
        <div className="userProfileInfo">
         <TopProfile topProfile={topProfile} />
         <BottomProfile bottomProfile={bottomposts} />
-
       </div>
     </>
   )

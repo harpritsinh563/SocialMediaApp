@@ -1,10 +1,19 @@
 import React from 'react';
 import './NavbarHome.css';
-import {Link} from "react-router-dom";
-
-
+import { Link } from "react-router-dom";
+import {useState} from 'react'
 
 const Home = () => {
+
+    const [searchTerm, setsearchTerm] = useState("")
+    // console.log(searchTerm)
+
+    /*const getSearchProfile = async () => {
+        const profile =  await axios.post(`user/searchProfile`,{searchTerm})
+        console.log(profile)   
+    }
+    getSearchProfile() */
+
     return (
         <>
             <div className="navbar">
@@ -15,24 +24,31 @@ const Home = () => {
 
                 <div className="navcenter">
                     <form id="form">
-                        <input className="input_search" type="search" id="search" placeholder="Search..." />
-                        <button className="btn_search"><i class="fa fa-search"></i></button>
+                        <input 
+                            className="input_search" 
+                            type="search" 
+                            onChange={(e)=>setsearchTerm(e.target.value)} 
+                            id="search" 
+                            value={searchTerm} 
+                            placeholder="Search..." 
+                        />
+
+                        <Link to={`/searchProfile/${searchTerm}`} ><button className="btn_search"  ><i className="fa fa-search"></i></button></Link>
+
                     </form>
                 </div>
-                
-                    <div className="dropdown navright">
-                        <img className="nav_img" id="profile"
-                    src="https://images.unsplash.com/photo-1622698639855-fda2a55e0cbe?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
-                </img>
-                        <div className="dropdown-content">
-                            <Link className = 'link itemHover'  to="/userProfile" > Profile  </Link> 
-                            <Link className = 'link itemHover' to="/viewPosts" > Saved  </Link>
-                             
-                            <a href="#"> Settings </a>
-                            <hr/>
-                            <a href="#"> Log-outttt</a>
-                        </div>
+                <div className="dropdown navright">
+                    <img className="nav_img" id="profile"
+                        src="https://picsum.photos/200">
+                    </img>
+                    <div className="dropdown-content">
+                        <Link className='link itemHover' to="/userProfile" > Profile  </Link>
+                        <Link className='link itemHover' to="/viewPosts" > Saved  </Link>
+                        <a href="#"> Settings </a>
+                        <hr />
+                        <a href="#"> Log-outttt</a>
                     </div>
+                </div>
             </div>
         </>
     );

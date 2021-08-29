@@ -5,17 +5,19 @@ import './Friend.css'
 const Friend = ({friend}) => {
     const [currFriend, setcurrFriend] = useState({})
     
-    // console.log(friend)
+    console.log(friend)
     useEffect(() => {
         const fetchFriend=async()=>{
             try{
-                const fetchFriend = await axios.get(`user/${friend}`)
+                const fetchFriend = await axios.get(`/user/${friend}`)
                 setcurrFriend(fetchFriend.data)
             }catch(err){}
         }
         fetchFriend()
     }, [])
-    // console.log(currFriend)
+
+    console.log(currFriend)
+
     return (
         <div className = "Friend">
             {/* <h1>Hello</h1> */}

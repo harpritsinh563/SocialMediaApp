@@ -79,4 +79,20 @@ router.put("/:id/savedPost",async(req,res)=>{
         res.status(403).send(err.message)
     }
 })
+
+router.post("/searchProfile",async(req,res)=>{
+
+    // console.log("hahaah")
+    try{
+        const regexterm = new RegExp( req.body.searchTerm,'i')
+        console.log(regexterm)
+        const users = await User.find({name: {$regex:regexterm}})
+        res.status(200).json(users)
+    }catch(err){
+
+        console.log(err.message)
+    }
+})
+
 module.exports = router
+
