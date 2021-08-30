@@ -8,7 +8,7 @@ router.post("/",async(req,res)=>
     {
         const comment = new Comment({
             comment:req.body.comment,
-            userName : req.body.username,
+            userId : req.body.userId,
             postId : req.body.postId
         })
         const newcomment = await comment.save();

@@ -13,7 +13,8 @@ const Home = () => {
         console.log(profile)   
     }
     getSearchProfile() */
-
+    // const currId = "61275e11f0201774782ba0cd"
+    const currId = "61275e38f0201774782ba0cf"
     return (
         <>
             <div className="navbar">
@@ -43,10 +44,11 @@ const Home = () => {
                     </img>
                     <div className="dropdown-content">
                         <Link className='link itemHover' to="/userProfile" > Profile  </Link>
-                        <Link className='link itemHover' to="/viewPosts" > Saved  </Link>
+                        <Link className='link itemHover' to={`/likedPosts/${currId}`} > Liked  </Link>
+                        <Link className='link itemHover' to={`/savedPosts/${currId}`} > Saved  </Link>
                         <a href="#"> Settings </a>
                         <hr />
-                        <a href="#"> Log-outttt</a>
+                        <a href="#"> Logout</a>
                     </div>
                 </div>
             </div>

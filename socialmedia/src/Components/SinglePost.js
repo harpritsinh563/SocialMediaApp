@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import './singlePost.css'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const SinglePost = ({post}) => {
     const [currentpost,setCurrentPost]=useState({});
@@ -24,7 +25,9 @@ const SinglePost = ({post}) => {
 
     return (
         <>
+            <Link to ={`/viewPost/${currentpost._id}`}>
             <img className="Img"  src={currentpost.photo}></img>
+            </Link>
         </>    
     )
 }
