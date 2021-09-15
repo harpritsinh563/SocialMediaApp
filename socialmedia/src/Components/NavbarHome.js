@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './NavbarHome.css';
 import { Link } from "react-router-dom";
 import {useState} from 'react'
+import { Context } from '../context/Context';
 
-const Home = () => {
+const NavbarHome = () => {
 
     const [searchTerm, setsearchTerm] = useState("")
-    // console.log(searchTerm)
-
-    /*const getSearchProfile = async () => {
-        const profile =  await axios.post(`user/searchProfile`,{searchTerm})
-        console.log(profile)   
+    const {user,dispatch} = useContext(Context)
+    console.log(user)
+    const currId = user._id;
+    console.log(currId)
+    const handleLogout = () => 
+    {
+        dispatch({type:"LOGOUT"})
+        window.location.replace('/')
     }
-    getSearchProfile() */
-    // const currId = "61275e11f0201774782ba0cd"
-    const currId = "61275e38f0201774782ba0cf"
     return (
         <>
             <div className="navbar">
@@ -48,7 +49,7 @@ const Home = () => {
                         <Link className='link itemHover' to={`/savedPosts/${currId}`} > Saved  </Link>
                         <a href="#"> Settings </a>
                         <hr />
-                        <a href="#"> Logout</a>
+                        <a onClick={handleLogout}> LOGOUT </a>
                     </div>
                 </div>
             </div>
@@ -56,4 +57,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default NavbarHome;

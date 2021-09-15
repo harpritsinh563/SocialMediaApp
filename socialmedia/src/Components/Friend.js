@@ -20,7 +20,6 @@ const Friend = ({friend}) => {
 
     return (
         <div className = "Friend">
-            {/* <h1>Hello</h1> */}
             <img src={currFriend.profilepic} alt="" className="profilepic_friend" />
              <div className="title_friend">{currFriend.userName}</div>           
         </div>

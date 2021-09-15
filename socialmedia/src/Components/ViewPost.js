@@ -7,11 +7,7 @@ import { useState,useEffect } from 'react'
 import PostTop from './PostTop'
 import Comment from './Comment'
 
-
-
-
-const ViewPost = () => {
-    
+const ViewPost = () => {  
     const location = useLocation()
     const postId = location.pathname.split('/')[2]
     const [post, setpost] = useState({})
@@ -27,7 +23,6 @@ const ViewPost = () => {
                 setuser(currUser.data)
                 const comments = await axios.get(`/comment/${postId}`)
                 setcomment(comments.data)
-
             }
             catch(err){
 

@@ -3,7 +3,6 @@ import './PostTop.css'
 
 
 const PostTop = ({user}) => {
-    console.log(user)
     return (
         <>
             <div className="top">

@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Post from './Post';
 import NavbarHome from './NavbarHome';
 import './home.css';
 import axios from 'axios'
+import { Context } from '../context/Context';
 
 const Home = () =>  {
 
     const [posts, setposts] = useState([])
-    let currId = "61275e11f0201774782ba0cd";
+    const {user,dispatch} = useContext(Context)
+    const currId = user._id
     useEffect(() => {
 
 		const fetchPost = async() => {
@@ -17,9 +19,6 @@ const Home = () =>  {
 		fetchPost()
         
     }, [])
-
-    console.log(posts)
-
     return (
         <>
             <NavbarHome/>

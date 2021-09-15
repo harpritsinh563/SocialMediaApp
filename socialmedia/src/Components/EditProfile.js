@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from './Navbar'
 import { useState , useEffect } from 'react'
 import axios from "axios"
+import { Context } from '../context/Context'
 
 export const EditProfile = () => {
 
@@ -12,19 +13,16 @@ export const EditProfile = () => {
     const [age,setAge] = useState(0)
     const [phone,setPhone] = useState("")
 
-    const currId = "61275e11f0201774782ba0cd"
-
+    const {user,dispatch} = useContext(Context)
+    const currId = user._id;
     useEffect(() => {
         const fetchInfo = async () => {
             try {
                 const uInfo = await axios.get(`/user/${currId}`)
                 setuserInfo(uInfo.data)
                 setName(uInfo.data.name)
-                // console.log(uInfo.data)
-                // console.log(name)
                 setUname(uInfo.data.userName)
                 setAge(uInfo.data.age)
-                // console.log(age)
                 setPhone(uInfo.data.contact)
             } catch (err) {
                 console.log("Error")

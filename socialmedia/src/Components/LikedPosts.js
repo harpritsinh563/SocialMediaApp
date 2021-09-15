@@ -8,9 +8,7 @@ import axios from 'axios';
 const LikedPosts = () => {
     
     const location = useLocation()
-    
     const userId = location.pathname.split('/')[2]
-    //console.log(userId)
     const [user, setuser] = useState({})
     const [likedPost, setlikedPost] = useState([])
     useEffect(() => {

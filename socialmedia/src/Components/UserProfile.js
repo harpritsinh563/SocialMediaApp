@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import NavbarHome from './NavbarHome'
 import TopProfile from './TopProfile'
 import BottomProfile from './BottomProfile'
 import './UserProfile.css'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
+import { Context } from '../context/Context'
+
+
 export const UserProfile = () => {
   const [profileInfo,setprofileInfo]=useState({});
   const [bottomposts,setBottomPosts]=useState([]);
-  
-  const currentid="61275e11f0201774782ba0cd"
-  
+  const {user,dispatch} = useContext(Context);
+  // const currentid="61275e11f0201774782ba0cd"
+  const currentid = user._id;
+  console.log(currentid)
   useEffect(()=>{
     const fetchProfile = async() =>
     {
