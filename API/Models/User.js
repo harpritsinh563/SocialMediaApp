@@ -70,6 +70,16 @@ const userSchema = new mongoose.Schema({
     {
         type : Number,
         default : 0
+    },
+    confirmed :
+    {
+        type: Boolean,
+        default : false
+    },
+    emailToken : 
+    {
+        type : String,
+        default : ""
     }
 },{timestamps:true});
 
