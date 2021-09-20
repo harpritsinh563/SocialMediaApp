@@ -3,14 +3,14 @@ import './NavbarHome.css';
 import { Link } from "react-router-dom";
 import {useState} from 'react'
 import { Context } from '../context/Context';
-
+import AddPost from './AddPost';
 const NavbarHome = () => {
 
     const [searchTerm, setsearchTerm] = useState("")
     const {user,dispatch} = useContext(Context)
-    console.log(user)
+    // console.log(user)
     const currId = user._id;
-    console.log(currId)
+    // console.log(currId)
     const handleLogout = () => 
     {
         dispatch({type:"LOGOUT"})
@@ -39,6 +39,9 @@ const NavbarHome = () => {
 
                     </form>
                 </div>
+                <div className="addPost">
+                   <Link className="link" to="/AddPost"> <i className="fas fa-plus-square"></i> </Link>
+                </div>
                 <div className="dropdown navright">
                     <img className="nav_img" id="profile"
                         src="https://picsum.photos/200">
@@ -47,9 +50,8 @@ const NavbarHome = () => {
                         <Link className='link itemHover' to="/userProfile" > Profile  </Link>
                         <Link className='link itemHover' to={`/likedPosts/${currId}`} > Liked  </Link>
                         <Link className='link itemHover' to={`/savedPosts/${currId}`} > Saved  </Link>
-                        <a href="#"> Settings </a>
                         <hr />
-                        <a onClick={handleLogout}> LOGOUT </a>
+                        <a className="itemHover" style={{cursor:"pointer"}} onClick={handleLogout}> LOGOUT </a>
                     </div>
                 </div>
             </div>

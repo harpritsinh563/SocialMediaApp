@@ -12,9 +12,8 @@ export const UserProfile = () => {
   const [profileInfo,setprofileInfo]=useState({});
   const [bottomposts,setBottomPosts]=useState([]);
   const {user,dispatch} = useContext(Context);
-  // const currentid="61275e11f0201774782ba0cd"
+  
   const currentid = user._id;
-  console.log(currentid)
   useEffect(()=>{
     const fetchProfile = async() =>
     {
@@ -39,13 +38,15 @@ export const UserProfile = () => {
     photo : profileInfo.profilepic,
     friendsCount : profileInfo.friendCount
   }
-  
+
   return (
     <>
       <NavbarHome />
        <div className="userProfileInfo">
         <TopProfile topProfile={topProfile} />
-        <BottomProfile bottomProfile={bottomposts} />
+        {
+          <BottomProfile bottomProfile={bottomposts} />
+        }
       </div>
     </>
   )

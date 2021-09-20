@@ -8,6 +8,7 @@ import PostTop from './PostTop'
 import Comment from './Comment'
 
 const ViewPost = () => {  
+
     const location = useLocation()
     const postId = location.pathname.split('/')[2]
     const [post, setpost] = useState({})
@@ -31,7 +32,8 @@ const ViewPost = () => {
         fetchPost()
     
     }, [])
-    console.log(post)
+    const publicFolder = "http://localhost:5000/Images/"
+    const pic = publicFolder+post.photo
     return (
 
         <>
@@ -40,7 +42,7 @@ const ViewPost = () => {
             
         <div className = "Post">
             <div className= "LeftComponent">
-                <img src= {post.photo} alt="" className="postImg" />
+                <img src= {pic} alt="" className="postImg" />
 
             </div>
             <div className= "RightComponent">
@@ -55,10 +57,8 @@ const ViewPost = () => {
                     ))
                 }
             </div>
-            
         </div>
         </div>
-
         </>
     )
 }

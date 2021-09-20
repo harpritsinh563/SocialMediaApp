@@ -13,6 +13,7 @@ import Search from './Components/Search'
 import { useLocation } from 'react-router-dom'
 import ViewPost from './Components/ViewPost';
 import axios from 'axios';
+import AddPost from './Components/AddPost';
 
 const App = () => {
 
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/searchProfile/:searchTerm">  <Search /> </Route>
           <Route path="/viewPost/:postId">  <ViewPost /> </Route>
           <Route path="/main/:id"><App/></Route>
+          <Route path='/AddPost' component={AddPost}></Route>
         </Switch>
         {/* </user.Provider> */}
       </BrowserRouter>
