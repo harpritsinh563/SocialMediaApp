@@ -1,4 +1,10 @@
 .caption{
-    margin-left: 25%;
+    margin-left: 50%;
     margin-top: 1%;
+    width: 10vw;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
 }
