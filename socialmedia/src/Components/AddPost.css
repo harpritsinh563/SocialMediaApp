@@ -8,3 +8,66 @@
     align-items: center;
     justify-content: center;
 }
+.captionField
+{
+    border: none;
+    font-size: 30px;
+    font-family: 'Montserrat';
+    padding: 20px;
+    width: 70vw;
+    font-size: 20px;
+    height: 30vh;
+    border:1px solid;
+    font-weight: 1000;
+    border-radius: 10px;
+}
+.captionField:focus {
+    outline : none;
+}
+.cameraicon
+{
+    width: 25px;
+    font-size: 20px;
+    color: grey;
+    cursor: pointer;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center; 
+}
+.AddPost
+{
+    padding-top:50px;
+}
+.createPost
+{
+    position: relative;
+}
+.previewphoto
+{
+    margin-left: 150px;
+    width: 70vw;
+    height:40vh;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.innerCreatePost
+{
+    margin-left: 150px;
+    display: flex;
+    align-items: center;
+}
+.submitbutton{
+    position: absolute;
+    top: 5.8vh;
+    right: 11vw;
+    color: honeydew;
+    background-color: green;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor : pointer;
+    font-size: larger;
+}

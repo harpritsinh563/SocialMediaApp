@@ -58,6 +58,7 @@ router.put("/:id/addFriend",async(req,res)=>{
     }
 })
 
+
 router.put("/:id/savedPost",async(req,res)=>{
     try{
         const user = await User.findById(req.body.userId)
@@ -81,11 +82,8 @@ router.put("/:id/savedPost",async(req,res)=>{
 })
 
 router.post("/searchProfile",async(req,res)=>{
-
-    // console.log("hahaah")
     try{
         const regexterm = new RegExp( req.body.searchTerm,'i')
-        console.log(regexterm)
         const users = await User.find({name: {$regex:regexterm}})
         res.status(200).json(users)
     }catch(err){

@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
 import PostTop from './PostTop'
 import Comment from './Comment'
-import { Input, Button } from '@material-ui/core'
+import { TextField,Button,Tooltip } from '@material-ui/core'
 import { Context } from '../context/Context'
 
 
@@ -15,24 +15,17 @@ const ViewPost = () => {
     const location = useLocation()
     const postId = location.pathname.split('/')[2]
     const [post, setpost] = useState({})
-    // const [user, setuser] = useState({})
     const [comment, setcomment] = useState([])
     const [Newcomment, setNewcomment] = useState("")
-    const [pushedcomment, setpushedcomment] = useState(false)
-    const [deletePressed, setdeletePressed] = useState("")
-
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 const currPost = await axios.get(`/post/${postId}`)
                 setpost(currPost.data)
                 const currId = currPost.data.userId
-                // const currUser = await axios.get(`/user/${currId}`)
-                // setuser(currUser.data)
-                
-                     const comments = await axios.get(`/comment/${postId}`)
-                     setcomment(comments.data)
-                    
+                const comments = await axios.get(`/comment/${postId}`)
+                setcomment(comments.data)
+
             }
             catch (err) {
 
@@ -42,10 +35,6 @@ const ViewPost = () => {
 
     }, [])
 
-
-
-
-
     const handleComment = async () => {
         try {
             const PushComment = {
@@ -54,83 +43,53 @@ const ViewPost = () => {
                 userId: user._id,
             }
             const response = await axios.post('/comment/', PushComment)
-
             setNewcomment("")
-            
-                const comments = await axios.get(`/comment/${postId}`)
-                     setcomment(comments.data)
-            
+            const comments = await axios.get(`/comment/${postId}`)
+            setcomment(comments.data)
+
         }
         catch (err) {
 
         }
 
     }
-
-
-
-
-
-
-
-    const DeleteComment = async(com) =>
-    {
-        try{
+    const DeleteComment = async (com) => {
+        try {
             const delete_comment = await axios.delete(`/comment/${com._id}`)
-            
+
             const comments = await axios.get(`/comment/${postId}`)
-                     setcomment(comments.data)
-            
-            
+            setcomment(comments.data)
         }
-        catch(err)
-        {
+        catch (err) {
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
     const publicFolder = "http://localhost:5000/Images/"
     const pic = publicFolder + post.photo
-
     return (
 
         <>
             <NavbarHome />
-            <div className="Container">
-
-                <div className="Post">
-                    <div className="LeftComponent">
-                        <img src={pic} alt="" className="postImg" />
-
+            <div className="viewpost_container">
+                <div className="viewpost_post">
+                    <div className="viewpost_leftcomponent">
+                        <img src={pic} alt="" className="viewpost_post_image" />
                     </div>
-                    <div className="RightComponent">
-                        <div className='showComment'>
+                    <div className="viewpost_rightcomponent">
+                        <div className='viewpost_show_comment'>
                             <PostTop user={user} />
-                            <div className="caption_viewpost">
+                            <div className="viewpost_caption">
                                 <span ><h4>{post.caption}</h4></span>
                             </div>
                             <hr />
                             {
                                 comment.map((com) => (
                                     <>
-                                        <div className='comments'>
+                                        <div className='viewpost_comments'>
                                             <Comment comment={com} />
-                                            {/* {() => setdeletePressed(com._id)}
-                                              */}
-                                            <button style = {{padding : "0"}} onClick = {()=> DeleteComment(com)} > 
-                                            <i className = "fas fa-window-close"  ></i>
-                                             </button>
-                                             
+                                            <button style={{ padding: "0",border:"none"}} onClick={() => DeleteComment(com)} >
+                                                <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
+                                            </button>
                                         </div>
                                         <hr />
 
@@ -138,8 +97,8 @@ const ViewPost = () => {
                                 ))
                             }
                         </div>
-                        <div className='Comment_Input' >
-                            <Input type='text' value={Newcomment} onChange={(e) => setNewcomment(e.target.value)} placeholder='Enter a comment' />
+                        <div className='viewpost_comment_input' >
+                            <TextField id="standard-basic" value={Newcomment} onChange={(e) => setNewcomment(e.target.value)} label="Comment" variant="standard" />       
                             <Button type='submit' onClick={handleComment}>
                                 Comment
                             </Button>

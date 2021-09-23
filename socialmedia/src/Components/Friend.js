@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React , { useState, useEffect} from 'react'
 import './Friend.css'
-
+import {Link} from 'react-router-dom'
 const Friend = ({friend}) => {
     const [currFriend, setcurrFriend] = useState({})
     
@@ -16,12 +16,13 @@ const Friend = ({friend}) => {
         fetchFriend()
     }, [])
 
-    console.log(currFriend)
-
+    const publicfolder = "http://localhost:5000/Images/"
     return (
+        
         <div className = "Friend">
-            <img src={currFriend.profilepic} alt="" className="profilepic_friend" />
-             <div className="title_friend">{currFriend.userName}</div>           
+           <Link className="link" to={`/userProfile/${currFriend._id}`}> <img src={publicfolder+currFriend.profilepic} alt="" className="profilepic_friend" /></Link>
+         <Link className="link" to={`/userProfile/${currFriend._id}`}>    <div className="title_friend">{currFriend.userName}</div>  </Link>
+                      
         </div>
     )
 }

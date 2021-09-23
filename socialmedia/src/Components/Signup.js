@@ -15,7 +15,7 @@ const Signup = () => {
     const [pass, setPass] = useState("")
     const [Repass, setRepass] = useState("")
     const [gender,setGender] = useState("")
-
+    const publicfolder="http://localhost:5000/Images/"
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
@@ -27,7 +27,7 @@ const Signup = () => {
                 password : pass,
                 email : email,
                 gender : gender,
-                profilepic : "jhftt",
+                profilepic :"AVATAR.png",
             }
             const user = await axios.post(`auth/register`,newUser)
             window.location.replace('/')

@@ -49,11 +49,11 @@ const App = () => {
           <Route exact path='/' component={Login} ></Route>
           <Route path='/Signup' component={Signup}></Route>
           <Route path="/home" component={Home}></Route>
-          <Route path="/userProfile" component={UserProfile}></Route>
+          <Route path="/userProfile/:id" component={UserProfile}></Route>
           <Route path="/editProfile" component={EditProfile}></Route>
           <Route path="/likedPosts/:id"><LikedPosts /></Route>
           <Route path="/savedPosts/:id"><SavedPosts /></Route>
-          <Route path="/userFriends" component={UserFriends}></Route>
+          <Route path="/userFriends/:id" component={UserFriends}></Route>
           <Route path="/likedBy/:postId"> <LikedBy /> </Route>
           <Route path="/searchProfile/:searchTerm">  <Search /> </Route>
           <Route path="/viewPost/:postId">  <ViewPost /> </Route>

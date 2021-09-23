@@ -4,7 +4,6 @@
 }
 
 .topProfile{
-    /* position: sticky; */
     margin-top: 4%;
     display: flex;
     justify-content: flex;
@@ -15,7 +14,7 @@
     padding-bottom: 4%;
 }
 
-.profilepic{
+.topProfile_profilepic{
     margin-top: 2%;
     padding: 1.5%;
     height: 20vh;
@@ -24,52 +23,76 @@
     object-fit: cover;
 }
 
-.editIcon{
+.topProfile_editicon{
     margin-left: 1.1vw;
     cursor: pointer;
     font: bold 2.5vh/1vh 'Roboto Mono', serif;
 }
 
-.icon:hover{
+.topProfile_edit_icon:hover{
     color: #50aeee;
 }
 
-.icon_add{
+.topProfile_icon_add{
     margin-left: 1.1vw;
 }
-.icon_add:hover{
+.topProfile_icon_add:hover{
     color: #50aeee;
 }
 
-.profilepic:hover{
+.topProfile_profilepic:hover{
     box-shadow: 3px 2px  #50aeee;
 }
 
-.together{
+.topProfile_info_parent{
     display: flex;
 }
 
-.uname{
+.topProfile_username{
     margin-left: 3vw;
     font-size: x-large;
-    margin-bottom: 3vh;
-    font: bold 3vh/3vh 'Roboto Mono', serif;
+    font:  3vh/3vh 'Roboto Mono', serif;
 }
 
-.details{
-    justify-content: space-between;
+.topProfile_details{
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
 }
 
-.tittle{
+.topProfile_text{
     margin-left: 3vw;
+    font-family: 'Raleway', sans-serif;
+    font-weight: lighter;
 }
- .friends{
+ .topProfile_friends{
     cursor: pointer;
 
  }
   
-.friends:hover{
+.topProfile_friends:hover{
+    color: #50aeee;
+} 
+.topProfile_icon_add_post
+{
+    margin-left: 1vw;
+    font-size:large;
+    cursor:pointer;
+}
+.topProfile_icons_uname
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 3vh;
+    justify-content: space-between;
+}
+.topProfile_icons
+{
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 1.1vw;
+    align-items: center;
+}
+.topProfile_icon_add_post:hover{
     color: #50aeee;
 } 

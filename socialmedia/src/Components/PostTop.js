@@ -3,11 +3,14 @@ import './PostTop.css'
 
 
 const PostTop = ({user}) => {
+
+    const publicFolder = "http://localhost:5000/Images/"
+
     return (
         <>
             <div className="top">
                 <div style={{display:"flex",alignItems:"center"}}>
-                    <img src={user.profilepic} alt="" className="postTopPropic" />
+                    <img src={publicFolder+user.profilepic} alt="" className="postTopPropic" />
                     <h5>{user.userName}</h5>
                 </div>
             </div>

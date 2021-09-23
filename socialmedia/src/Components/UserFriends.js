@@ -5,16 +5,19 @@ import Friend from './Friend'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Context } from '../context/Context'
+import {useLocation} from 'react-router-dom'
 
 const UserFriends = () => {
     
     const {user,dispatch} = useContext(Context);
-    const currId = user._id;
+    // const currId = user._id;
+    const location = useLocation();
+    const currId = location.pathname.split('/')[2];
     const [friends, setfriends] = useState([])
     useEffect(() => {
         const fetchFriends = async()=>{
             try{
-                const user = await axios.get(`user/${currId}`)
+                const user = await axios.get(`/user/${currId}`)
                 setfriends(user.data.friends)
             }
             catch(err){} 

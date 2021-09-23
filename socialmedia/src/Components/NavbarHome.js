@@ -8,9 +8,7 @@ const NavbarHome = () => {
 
     const [searchTerm, setsearchTerm] = useState("")
     const {user,dispatch} = useContext(Context)
-    // console.log(user)
     const currId = user._id;
-    // console.log(currId)
     const handleLogout = () => 
     {
         dispatch({type:"LOGOUT"})
@@ -47,7 +45,7 @@ const NavbarHome = () => {
                         src="https://picsum.photos/200">
                     </img>
                     <div className="dropdown-content">
-                        <Link className='link itemHover' to="/userProfile" > Profile  </Link>
+                        <Link className='link itemHover' to={`/userProfile/${currId}`} > Profile  </Link>
                         <Link className='link itemHover' to={`/likedPosts/${currId}`} > Liked  </Link>
                         <Link className='link itemHover' to={`/savedPosts/${currId}`} > Saved  </Link>
                         <hr />

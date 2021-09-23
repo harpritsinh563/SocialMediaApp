@@ -1,0 +1,71 @@
+.editprofile_container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height:90vh;
+}
+.editprofile_card
+{
+    margin-top: 2vh;
+    height:78vh;
+    width:30vw;
+    border: 1px solid;
+    border-radius: 2%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+}
+.editprofile_top
+{
+    flex:5;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.editprofile_top_img
+{
+    margin-top: 2vh;
+    border-radius: 50%;
+    height:20vh;
+    border: 1px solid black;
+    margin-left: 2.5vw;
+    width:10vw;
+}
+
+.editprofile_bottom
+{
+    flex:7;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+.editprofile_submit_button
+{
+    padding:2%;
+    margin-top: 5%;
+    width:20vw;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Montserrat';
+    background-color: green;
+    border-radius: 3vh;
+    outline: none;
+    cursor: pointer;
+    font-weight: 900;
+    border:none;
+    color: honeydew;
+    letter-spacing: 2px;
+}
+.editprofile_cameraicon
+{
+    width: 2vw;
+    font-size: 20px;
+    color: grey;
+    cursor: pointer;
+    height: 2vh;
+    margin-top: 4vh;
+    margin-left: 1.5vw;
+}

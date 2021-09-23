@@ -25,9 +25,6 @@ const LikedPosts = () => {
 
         fetchUser()
     }, [])
-    console.log(user)
-    console.log(likedPost)
-
     return (
         <>
         <NavbarHome/>

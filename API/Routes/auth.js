@@ -37,11 +37,11 @@ router.post("/register",async(req,res)=>{
             emailToken : crypto.randomBytes(64).toString('hex')
         });
         const user = await newUser.save();
-        console.log(process.env.Gmail_user)
-        console.log(process.env.Gmail_pass)
+        console.log(process.env.GMAIL_USER)
+        console.log(process.env.GMAIL_PASS)
         
         const mailOptions = {
-            from : process.env.Gmail_user,
+            from : process.env.GMAIL_USER,
             to : user.email,
             subject : 'Verify your mail',
             html : `<p> Thanks for Registering </p>

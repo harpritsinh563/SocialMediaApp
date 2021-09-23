@@ -1,19 +1,22 @@
 import React, { useContext } from 'react'
 import Navbar from './Navbar'
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from "axios"
 import { Context } from '../context/Context'
-
+import { Tooltip } from '@material-ui/core'
+import './EditProfile.css'
+import {TextField} from '@material-ui/core'
 export const EditProfile = () => {
 
     const [userInfo, setuserInfo] = useState({})
-
-    const [name,setName] = useState("")
-    const [uname,setUname] = useState("")
-    const [age,setAge] = useState(0)
-    const [phone,setPhone] = useState("")
-
-    const {user,dispatch} = useContext(Context)
+    const publicfolder = "http://localhost:5000/Images/"
+    const [name, setName] = useState("")
+    const [uname, setUname] = useState("")
+    const [age, setAge] = useState(0)
+    const [phone, setPhone] = useState("")
+    const [profilepicImage,setprofilepic]=useState(null)
+    const [profilepicName,setprofilepicName]=useState("");
+    const { user, dispatch } = useContext(Context)
     const currId = user._id;
     useEffect(() => {
         const fetchInfo = async () => {
@@ -26,7 +29,6 @@ export const EditProfile = () => {
                 setPhone(uInfo.data.contact)
             } catch (err) {
                 console.log("Error")
-
             }
         }
         fetchInfo()
@@ -34,38 +36,64 @@ export const EditProfile = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault()
-        try{
+        try {
+            let fname;
             const updatedUser = {
                 userName: uname,
-                contact:  phone,
+                contact: phone,
                 age: age,
                 name: name
             }
-            console.log(updatedUser)
-            await axios.put(`/user/${currId}`,updatedUser)
-        }catch(err){
+            if(profilepicImage)
+            {
+                const data = new FormData();
+                fname = user._id+Date.now();   
+                data.append("fname",fname);
+                data.append("file",profilepicImage);
+                updatedUser.profilepic=fname;
+                try {
+                    await axios.post('/uploads',data);
+                } catch (err) {
+                    
+                }
+            }
+            const res = await axios.put(`/user/${currId}`, updatedUser)
+            setuserInfo(res.data);
+            
+        } catch (err) {
 
         }
     }
 
 
     return (
-        <div>
-            <Navbar/>
-        <div className="container">
-            <div className="box">
-                Update!<br/><br/><br/>
-                <form onSubmit = { handleUpdate}>
-                    Name <input type="text" value={name} onChange = {(e)=>setName(e.target.value)} /><br/>
-                    Uname <input type="text" value={uname}  onChange = {(e)=>setUname(e.target.value)}  /><br/>
-                    Phone <input type="text" value={phone} onChange = {(e)=>setPhone(e.target.value)} /><br/>
-                    Age <input type="number" value={age} onChange = {(e)=>setAge(e.target.value)} /><br/>
-                    <br/><br/>
-                    <button className="signupbutton" type="submit" > Update! </button> <br/><br/>
+            <>
+            <Navbar />
+            <div className="editprofile_container">
+                <form onSubmit={handleUpdate}>
+                <div className="editprofile_card">
+                    <div className="editprofile_top">     
+                            {<img className="editprofile_top_img" src={profilepicImage?URL.createObjectURL(profilepicImage):publicfolder+userInfo.profilepic}/>}
+                            <label htmlFor="profileinput">
+                                <Tooltip title="Edit Profile">
+                                <i className="editprofile_cameraicon fas fa-camera"></i>
+                                </Tooltip>
+                            </label>
+                            <input type="file" onChange={(e)=>setprofilepic(e.target.files[0])} id="profileinput" style={{display:"none"}}/>
+                    </div>
+                    <div className="editprofile_bottom">
+                    <TextField id="standard-basic" value={name} onChange={(e)=>setName(e.target.value)} label="Name" variant="standard" />
+                    <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={uname} onChange={(e) => setUname(e.target.value)} label="Username" variant="standard" />
+                    <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={phone} onChange={(e) => setPhone(e.target.value)} label="Phone" variant="standard" />
+                    <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={age} onChange={(e) => setAge(e.target.value)} label="Phone" variant="standard" />
+                    <button className="editprofile_submit_button" type="submit" >Update!</button>
+                    </div>
+                </div>
                 </form>
             </div>
-        </div>
-        </div>
+
+
+        </>
     )
 }
 export default EditProfile
