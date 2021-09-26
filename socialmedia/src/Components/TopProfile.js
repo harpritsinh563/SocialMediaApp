@@ -4,6 +4,7 @@ import { Tooltip } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Context } from '../context/Context'
 import axios from 'axios'
+
 const TopProfile = ({ topProfile }) => {
     const publicFolder = "http://localhost:5000/Images/"
     const pic = publicFolder + topProfile.photo;

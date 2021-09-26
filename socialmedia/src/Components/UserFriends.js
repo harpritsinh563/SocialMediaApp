@@ -14,6 +14,7 @@ const UserFriends = () => {
     const location = useLocation();
     const currId = location.pathname.split('/')[2];
     const [friends, setfriends] = useState([])
+
     useEffect(() => {
         const fetchFriends = async()=>{
             try{
@@ -24,7 +25,8 @@ const UserFriends = () => {
         }
         fetchFriends()
     }, [])
-    console.log(friends)
+
+    // console.log(friends)
     return (
         <>
         <NavbarHome/>

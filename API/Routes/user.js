@@ -77,7 +77,7 @@ router.put("/:id/savedPost",async(req,res)=>{
         res.status(200).json(updatedUser)
     }
     catch(err){
-        res.status(403).send(err.message)
+        res.status(403).json(err.message)
     }
 })
 

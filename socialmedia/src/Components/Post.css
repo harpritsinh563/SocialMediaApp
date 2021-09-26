@@ -12,3 +12,17 @@
     justify-content: center;
     border:1px solid black;
 }
+
+.Post_like{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    margin-left: 2vw;
+}
+
+.Post_save{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 31vw;
+}
