@@ -17,8 +17,6 @@ const transporter = nodemailer.createTransport({
 
 })
 
-// REGISTER
-// POST // GET 
 
 router.post("/register",async(req,res)=>{
     try
@@ -58,7 +56,7 @@ router.post("/register",async(req,res)=>{
     }
     catch(err)
     {
-        res.status(403).send(err.message);
+        res.status(200).send("signUp failed");
     }
 })
 
@@ -84,11 +82,13 @@ router.post("/login",async(req,res)=>{
         const user = await User.findOne({userName : req.body.userName});
         const comparepass = await bcrypt.compare(req.body.password,user.password);
         !comparepass && res.status(200).json("Wrong password");
+        console.log("below user");
         res.status(200).json(user);
     }
     catch(err)
-    {
-        res.status(403).json("User not found")
+    {   
+        console.log("inside catch");
+        res.status(200).json("User not found")
     }
 })
 

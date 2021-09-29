@@ -1,36 +1,35 @@
 import React from 'react'
 import PostTop from './PostTop'
 import axios from 'axios'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './Comment.css'
 
-
-
-
-const Comment = ({comment}) => {
+const Comment = ({ comment }) => {
     const [user, setuser] = useState({})
+
     useEffect(() => {
-        const fetchPost = async() =>{
-            try{
+        const fetchPost = async () => {
+            try {
                 const currUser = await axios.get(`/user/${comment.userId}`)
                 setuser(currUser.data)
-                
             }
-            catch(err){
+            catch (err) {
 
             }
         }
         fetchPost()
-    
+
     }, [])
+
     return (
         <>
-        <div className = "comment">
-            <PostTop user = {user}/>
-            <div className="caption">
-                <h4>{ comment.comment }</h4>
+            <div className="comment">
+                <PostTop user = {user}/>
+                
+                <div className="caption">
+                    <h4>{comment.comment}</h4>
                 </div>
-        </div>
+            </div>
         </>
     )
 }

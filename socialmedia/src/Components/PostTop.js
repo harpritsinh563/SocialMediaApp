@@ -5,7 +5,7 @@ import './PostTop.css'
 const PostTop = ({user}) => {
 
     const publicFolder = "http://localhost:5000/Images/"
-    // console.log(publicFolder+user.profilepic)
+    
     return (
         <>
             <div className="top">

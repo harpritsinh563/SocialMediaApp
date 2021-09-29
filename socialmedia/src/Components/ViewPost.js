@@ -4,7 +4,6 @@ import NavbarHome from './NavbarHome'
 import { useLocation } from 'react-router'
 import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
-import PostTop from './PostTop'
 import Comment from './Comment'
 import { TextField, Button, Tooltip } from '@material-ui/core'
 import { Context } from '../context/Context'
@@ -37,7 +36,7 @@ const ViewPost = () => {
 
                 currPost.data.likedBy.includes(user._id) && setIsLiked(true)
                 user.savedposts.includes(currPost.data._id) && setIsSaved(true)
-    
+
             }
             catch (err) {
 
@@ -112,7 +111,7 @@ const ViewPost = () => {
                     <CardHeader
                         avatar={
                             <Box mr={2}>
-                                <Avatar src={publicFolder + user.profilepic} />
+                                <Avatar src={publicFolder + curruser.profilepic} />
                             </Box>
                         }
                         title={curruser.userName}
@@ -143,101 +142,32 @@ const ViewPost = () => {
                 <div className="viewpost_rightcomponent">
                     <h3 className="viewpost_heading"> Comments </h3>
                     <div className='viewpost_show_comment'>
+                        {
+                            comment.map((com) => (
+                                <>
+                                    <div className='viewpost_comments'>
+                                        <Comment comment={com} />
+                                        <button style={{ padding: "0", border: "none" }} onClick={() => DeleteComment(com)} >
+                                            <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
+                                        </button>
+                                    </div>
+                                    <hr />
 
-                    <hr />
-                    {
-                        comment.map((com) => (
-                            <>
-                                <div className='viewpost_comments'>
-                                    <Comment comment={com} />
-                                    <button style={{ padding: "0",border:"none"}} onClick={() => DeleteComment(com)} >
-                                        <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
-                                    </button>
-                                </div>
-                                <hr />
-
-                            </>
-                        ))
-                    }
+                                </>
+                            ))
+                        }
                     </div>
                     <div className='viewpost_comment_input' >
-                            <TextField id="standard-basic" value={Newcomment} onChange={(e) => setNewcomment(e.target.value)} label="Comment" variant="standard" />       
-                            <Button type='submit' onClick={handleComment}>
-                                Comment
-                            </Button>
-                        </div>
+                        <TextField id="standard-basic" value={Newcomment} onChange={(e) => setNewcomment(e.target.value)} label="Comment" variant="standard" />
+                        <Button type='submit' onClick={handleComment}>
+                            Comment
+                        </Button>
                     </div>
-                
-                {/* 
-                <div className="viewpost_rightcomponent">
-                        <div className='viewpost_show_comment'>
-                            <PostTop user={user} />
-                            <div className="viewpost_caption">
-                                <span ><h4>{post.caption}</h4></span>
-                            </div>
-                            <hr />
-                            {
-                                comment.map((com) => (
-                                    <>
-                                        <div className='viewpost_comments'>
-                                            <Comment comment={com} />
-                                            <button style={{ padding: "0",border:"none"}} onClick={() => DeleteComment(com)} >
-                                                <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
-                                            </button>
-                                        </div>
-                                        <hr />
-
-                                    </>
-                                ))
-                            }
-                        </div>
-                        <div className='viewpost_comment_input' >
-                            <TextField id="standard-basic" value={Newcomment} onChange={(e) => setNewcomment(e.target.value)} label="Comment" variant="standard" />       
-                            <Button type='submit' onClick={handleComment}>
-                                Comment
-                            </Button>
-                        </div>
-                    
-                </div> */}
+                </div>
             </div>
 
 
-            {/* <div className="viewpost_container">
-                <div className="viewpost_post">
-                    <div className="viewpost_leftcomponent">
-                        <img src={pic} alt="" className="viewpost_post_image" />
-                    </div>
-                    <div className="viewpost_rightcomponent">
-                        <div className='viewpost_show_comment'>
-                            <PostTop user={user} />
-                            <div className="viewpost_caption">
-                                <span ><h4>{post.caption}</h4></span>
-                            </div>
-                            <hr />
-                            {
-                                comment.map((com) => (
-                                    <>
-                                        <div className='viewpost_comments'>
-                                            <Comment comment={com} />
-                                            <button style={{ padding: "0",border:"none"}} onClick={() => DeleteComment(com)} >
-                                                <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
-                                            </button>
-                                        </div>
-                                        <hr />
 
-                                    </>
-                                ))
-                            }
-                        </div>
-                        <div className='viewpost_comment_input' >
-                            <TextField id="standard-basic" value={Newcomment} onChange={(e) => setNewcomment(e.target.value)} label="Comment" variant="standard" />       
-                            <Button type='submit' onClick={handleComment}>
-                                Comment
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </>
 
 

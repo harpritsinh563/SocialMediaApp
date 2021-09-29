@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState , useContext } from 'react';
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, IconButton, CardActions, Button } from '@material-ui/core';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, CardActions } from '@material-ui/core';
 import './Post.css';
 import { Context } from '../context/Context'
 
@@ -17,11 +17,8 @@ const Post = ({ post }) => {
         const fetchUser = async () => {
             const currUser = await axios.get(`user/${post.userId}`)
             setcurruser(currUser.data)
-
             post.likedBy.includes(user._id) && setIsLiked(true)
             user.savedposts.includes(post._id) && setIsSaved(true)
-
-
         }
         fetchUser()
         
@@ -29,7 +26,7 @@ const Post = ({ post }) => {
 
 
     const handleLike = async() => {
-        // console.log("vrundan")
+        
         try{
             const tmpUser = {
                 userId : user._id,
@@ -46,6 +43,8 @@ const Post = ({ post }) => {
                 userId : user._id,
             }
             const savedPost = await axios.put(`user/${post._id}/savedPost`,tmpUser)
+            const fetchedUser = await axios.get('/user/'+user._id);
+            dispatch({type:'UPDATE',payload:fetchedUser.data});
             setIsSaved(!isSaved)
         }catch(err){
 
@@ -58,7 +57,7 @@ const Post = ({ post }) => {
                     <CardHeader
                         avatar={
                             <Box mr={2}>
-                                <Avatar src={publicFolder + user.profilepic} />
+                                <Avatar src={publicFolder + curruser.profilepic} />
                             </Box>
                         }
                         title={curruser.userName}
@@ -78,20 +77,16 @@ const Post = ({ post }) => {
                         </Box>
                     </CardContent>
                     <CardActions>
-                        <div>
-                        { isLiked && <button className="Post_like" onClick={handleLike}><i class="fas fa-heart fa-2x"></i></button> }
-                        { !isLiked && <button className="Post_like" onClick={handleLike}><i class="far fa-heart fa-2x"></i></button> }
-                        { isSaved && <button className="Post_Save" onClick={handleSave}><i class="fas fa-bookmark fa-2x"></i></button> }
-                        { !isSaved && <button className="Post_save" onClick={handleSave}><i class="far fa-bookmark fa-2x"></i></button> }
+                        <div className="post_saved_rightside" >
+                        { isLiked && <button className="Post_like" onClick={handleLike}><i className="fas fa-heart fa-2x"></i></button> }
+                        { !isLiked && <button className="Post_like" onClick={handleLike}><i className="far fa-heart fa-2x"></i></button> }
+                        { isSaved && <button className="Post_save" onClick={handleSave}><i className="fas fa-bookmark fa-2x"></i></button> }
+                        { !isSaved && <button className="Post_save" onClick={handleSave}><i className="far fa-bookmark fa-2x"></i></button> }
                         </div> 
                     </CardActions>
                 </Card>
             </div>
-
-
         </>
-
     );
 }
-
 export default Post;

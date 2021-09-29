@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {Button,TextField} from '@material-ui/core';
 
 const Login = () => {
 
@@ -25,8 +25,21 @@ const Login = () => {
                 setfetcheduser(fetched.data)
                 status = fetched.status
 
-                if (status == 200) {
-                    if (fetched.data == "Wrong password") {
+                console.log(fetched+"\n"+status);
+
+                if (status == 200){
+                    if (fetched.data == "User not found"){
+                        toast.error('Incorrect Username', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                    else if (fetched.data == "Wrong password") {
                         toast.error('Please enter correct password', {
                             position: "top-center",
                             autoClose: 5000,
@@ -54,7 +67,7 @@ const Login = () => {
                         dispatch({ type: "LOGIN", payload: fetched.data })
                         window.location.replace('/home')
                     }
-                }
+                } 
 
             }
             catch (err) {
@@ -69,18 +82,32 @@ const Login = () => {
         <>
             <Navbar />
             <div className="container">
-                <div className="login_box">LOGIN!<br /><br />
+                <div className="login_box"><br /><br />
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div>
                             <ToastContainer></ToastContainer>
                         </div>
-                        <input className="login_input" value={username} onChange={(e) => setusername(e.target.value)} type="text" placeholder="Enter Username" /><br />
-                        <input className="login_input" value={password} onChange={(e) => setpassword(e.target.value)} type="password" placeholder="Enter Password" /><br />
-                        <input id="remember" type="checkbox" />
-                        <label for="remember">Remember me</label>
+                        
+                        <TextField  
+                            variant="outlined"    
+                            required value={username} 
+                            onChange={(e) => setusername(e.target.value)} 
+                            label="Enter Username"> 
+                        </TextField> <br /> <br/>
+                        <TextField 
+                            variant="outlined"    
+                            required value={password} 
+                            onChange={(e) => setpassword(e.target.value)} 
+                            type="password" 
+                            label="Enter Password" > 
+                        </TextField>
+                        
                         <br /><br />
-                        <button type="submit" className="loginbutton">LOGIN!</button><br />
-                        <p style={{ marginTop: "15px" }}>New User ?? <Link to="Signup" >Click here</Link></p>
+                        <Button variant='contained' color="primary"  type="submit" className="loginbutton">LOGIN!</Button>
+                        <br />
+                        <br />
+                        {/* <p style={{ marginTop: "15px" }}>New User ?? <Link to="Signup" >Click here</Link></p> */}
+                        <Link to="Signup" >Sign Up</Link>
                     </form>
                 </div>
             </div>

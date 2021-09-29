@@ -61,13 +61,6 @@
 }
 .submitbutton{
     position: absolute;
-    top: 5.8vh;
-    right: 11vw;
-    color: honeydew;
-    background-color: green;
+    right: 15vw;
     padding: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor : pointer;
-    font-size: larger;
 }

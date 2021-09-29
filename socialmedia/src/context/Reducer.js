@@ -9,7 +9,10 @@ const Reducer = (state,action) =>
             return {
                 user : null
             }
-
+        case "UPDATE" :
+            return{
+                user: action.payload
+            }
         default:
             return state
     }

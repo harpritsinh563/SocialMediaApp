@@ -39,6 +39,7 @@ const AddPost = () => {
         } catch (err) {
             console.log(err)
         }
+        window.location.replace("/home")
 
     }
 
@@ -56,7 +57,9 @@ const AddPost = () => {
                     <div className="innerCreatePost">
                         <textarea className="captionField" onChange={(e) => setDes(e.target.value)} placeholder="What's on your mind..." ></textarea>
                     </div>
-                    <button className="submitbutton" type="submit">Post</button>
+                    <div className="submitbutton">
+                        <Button variant='contained' color="primary"  type="submit">Post</Button>
+                    </div>
                 </form>
             </div>
         </>

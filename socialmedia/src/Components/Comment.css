@@ -1,7 +1,8 @@
 .caption{
-    margin-left: 50%;
+    margin-left: 17%;
     margin-top: 1%;
-    width: 10vw;
+    padding-bottom: 2%;
+    width: 20vw;
     overflow-wrap: break-word;
     display: flex;
     flex-direction: row;

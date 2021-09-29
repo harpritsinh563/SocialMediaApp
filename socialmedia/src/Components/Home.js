@@ -15,7 +15,6 @@ const Home = () =>  {
 		const fetchPost = async() => {
 			const currPosts = await axios.get(`post/${currId}/feedPosts`)
             setposts(currPosts.data)
-            // console.log(currPosts.data)
         }
 		fetchPost()
         

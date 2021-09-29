@@ -15,9 +15,9 @@ export const EditProfile = () => {
     const [age, setAge] = useState(0)
     const [phone, setPhone] = useState("")
     const [profilepicImage,setprofilepic]=useState(null)
-    const [profilepicName,setprofilepicName]=useState("");
     const { user, dispatch } = useContext(Context)
     const currId = user._id;
+
     useEffect(() => {
         const fetchInfo = async () => {
             try {
@@ -54,17 +54,17 @@ export const EditProfile = () => {
                 try {
                     await axios.post('/uploads',data);
                 } catch (err) {
-                    
+                    console.log(err.data);
                 }
             }
             const res = await axios.put(`/user/${currId}`, updatedUser)
+            dispatch({ type: "UPADTE",payload: res.data })
             setuserInfo(res.data);
             
         } catch (err) {
-
+            console.log(err.data);
         }
     }
-
 
     return (
             <>
@@ -96,4 +96,5 @@ export const EditProfile = () => {
         </>
     )
 }
+
 export default EditProfile

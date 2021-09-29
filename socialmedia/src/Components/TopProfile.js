@@ -15,6 +15,7 @@ const TopProfile = ({ topProfile }) => {
         try
         {
             const friendAdded = await axios.put('/user/'+user._id+'/addFriend/',{userId:topProfile.userId});
+            dispatch({type:'UPDATE',payload:friendAdded.data});
         }
         catch(err)
         {

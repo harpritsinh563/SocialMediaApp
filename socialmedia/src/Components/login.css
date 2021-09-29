@@ -9,7 +9,7 @@ body
     font-weight: bolder;
 }
 
-.loginbutton
+/* .loginbutton
 {
   padding : 0.5vw;
   font-family: "montserrat","sans-serif";
@@ -34,7 +34,7 @@ input
   border-radius: 0.4vw;
   font-family: "montserrat","sans-serif";
   font-weight: bolder;
-}
+} */
 
 .login_box
 {

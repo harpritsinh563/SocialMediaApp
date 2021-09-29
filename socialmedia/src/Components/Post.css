@@ -26,3 +26,7 @@
     cursor: pointer;
     margin-left: 31vw;
 }
+.post_saved_rightside{
+    display: flex;
+    justify-content: space-between;
+}
