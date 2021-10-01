@@ -24,7 +24,9 @@ import { Link } from 'react-router-dom'
         }
         fetchPost();
     },[])
-    const pic = publicFolder+currentpost.photo
+    let pic;
+    if(currentpost)
+        pic = publicFolder+currentpost.photo
     
     return (
         <>

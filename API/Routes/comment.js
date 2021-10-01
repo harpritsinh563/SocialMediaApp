@@ -43,8 +43,18 @@ router.get("/:id",async(req,res)=>{
     }
     catch(err)
     {
-        res.status(403).json(err);
+        res.status(200).json(err);
     }
 })
+
+router.delete("/:id/deleteAll",async(req,res)=>{
+    try{
+        const allcomments = await Comment.deleteMany({postId:req.params.id});
+        res.status(200).json(allcomments);
+    }catch(err){
+        res.status(200).json("delete failed")
+    }
+})
+
 
 module.exports=router

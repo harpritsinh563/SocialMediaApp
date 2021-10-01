@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const User = require("../Models/User")
 const bcrypt = require("bcrypt")
+const Post = require("../Models/Post")
 
 // send data -> post
 // update data -> put
@@ -62,22 +63,30 @@ router.put("/:id/addFriend",async(req,res)=>{
 router.put("/:id/savedPost",async(req,res)=>{
     try{
         const user = await User.findById(req.body.userId)
+        const post = await Post.findById(req.params.id)
         if(user.savedposts.includes(req.params.id))
         {
             await user.updateOne({
                 $pull:{savedposts:req.params.id}
+            })
+            await post.updateOne({
+                $pull:{savedBy:req.body.userId}
             })
         }
         else{
             await user.updateOne({
                 $push:{savedposts:req.params.id}
             })
+            await post.updateOne({
+                $push:{savedBy:req.body.userId}
+            })
         }
+
         const updatedUser = await User.findById(req.body.userId)
         res.status(200).json(updatedUser)
     }
     catch(err){
-        res.status(403).json(err.message)
+        res.status(200).json(err.message)
     }
 })
 

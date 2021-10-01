@@ -80,22 +80,21 @@ const Login = () => {
     }
     return (
         <>
-            <Navbar />
-            <div className="container">
+            {/* <Navbar /> */}
+            <div className="container1">
                 <div className="login_box"><br /><br />
+                
+                <h2>Login!!</h2><br/>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div>
                             <ToastContainer></ToastContainer>
                         </div>
-                        
                         <TextField  
-                            variant="outlined"    
                             required value={username} 
                             onChange={(e) => setusername(e.target.value)} 
                             label="Enter Username"> 
                         </TextField> <br /> <br/>
                         <TextField 
-                            variant="outlined"    
                             required value={password} 
                             onChange={(e) => setpassword(e.target.value)} 
                             type="password" 
@@ -103,11 +102,10 @@ const Login = () => {
                         </TextField>
                         
                         <br /><br />
-                        <Button variant='contained' color="primary"  type="submit" className="loginbutton">LOGIN!</Button>
+                        <Button variant='contained' color="primary"  type="submit">LOGIN!</Button>
                         <br />
                         <br />
-                        {/* <p style={{ marginTop: "15px" }}>New User ?? <Link to="Signup" >Click here</Link></p> */}
-                        <Link to="Signup" >Sign Up</Link>
+                        <Button variant='contained' color="success"><Link to="Signup" className="link" >SignUp</Link></Button>
                     </form>
                 </div>
             </div>

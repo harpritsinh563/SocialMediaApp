@@ -9,23 +9,36 @@ body
     font-weight: bolder;
 }
 
+.container2{
+    background-image: url("../Images/wallpaper.jpg");
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    height: 100vh;
+  
+}
+
 .box
 {
-  width: 40vw;
+  width: 25vw;
   height: 75vh;
-  box-shadow:5px 5px 5px 5px #5E454B;
+  background: transparent;
+  /* box-shadow:5px 5px 5px 5px #5E454B; */
   position: absolute;
   border-radius: 2vw;
   background-color: white;
-  top: 2.5%;
-  left: 0;
+  top: 9%;
+  left: 7%;
   bottom: 0;
   right: 0;
   text-align: center;
   padding: 2%;
-  margin: auto;
+  /* margin-top: 5%; */
+  /* margin: auto; */
 }
 
 .radiobuttons{
-  
+  /* align-items: center; */
+  margin-top: 3%;
+  margin-left: 23%;
 }

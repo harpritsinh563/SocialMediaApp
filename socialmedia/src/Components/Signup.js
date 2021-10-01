@@ -64,9 +64,10 @@ const Signup = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="container">
-                <div className="box">
+            {/* <Navbar /> */}
+            <div className="container2">
+                <div className="box"><h2>SignUp!! </h2>
+            
                     <form onSubmit={(e) => handleSubmit(e)} >
                         <div>
                             <ToastContainer></ToastContainer>
@@ -80,12 +81,12 @@ const Signup = () => {
                         <TextField
                             type="text"  label="Enter Age" required onChange={(e) => setAge(e.target.value)} >
                         </TextField> <br />
-                        {/* <div className="radiobutttons"> */}
+                        <div className="radiobuttons">
                             <RadioGroup row> 
                                 <FormControlLabel  value="male" control={<Radio />} label="Male" />
                                 <FormControlLabel  value="female" control={<Radio />} label="Female" />
                             </RadioGroup>
-                        {/* </div> */}
+                        </div>
                         {/* <TextField
                             type="radio" id="male" value="male" name="gender" required onChange={(e) => setGender(e.target.value)} > Male
                         </TextField>
@@ -111,7 +112,8 @@ const Signup = () => {
                         <br />
 
                         <Button variant="contained" color="primary" type="submit" className="signupbutton" >Signup!</Button><br /><br />
-                        <Link to="/">Log in </Link>
+                        <Button variant="contained" color="success" className="signupbutton" ><Link to="/" className="link">Log in </Link></Button><br /><br />
+                        
                     </form>
 
                 </div>

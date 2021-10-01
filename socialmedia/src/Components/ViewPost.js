@@ -60,7 +60,6 @@ const ViewPost = () => {
 
         }
         catch (err) {
-
         }
 
     }
@@ -83,6 +82,8 @@ const ViewPost = () => {
                 userId: user._id,
             }
             const likedPost = await axios.put(`/post/${post._id}/likepost`, tmpUser)
+            const fetchedUser = await axios.get('/user/'+user._id);
+            dispatch({type:'UPDATE',payload:fetchedUser.data});
             setIsLiked(!isLiked)
         } catch (err) {
 
@@ -93,12 +94,38 @@ const ViewPost = () => {
             const tmpUser = {
                 userId: user._id,
             }
-            const savedPost = await axios.put(`user/${post._id}/savedPost`, tmpUser)
-            setIsSaved(!isSaved)
+            const savedPost = await axios.put(`/user/${post._id}/savedPost`, tmpUser);
+            setIsSaved(!isSaved);
+            const fetchedUser = await axios.get('/user/'+user._id);
+            dispatch({type:'UPDATE',payload:fetchedUser.data});
+            
         } catch (err) {
 
         }
     }
+
+    
+    const handleDelete = async() => {
+        console.log(postId)
+        try{
+            console.log("above")
+            // console.log(user._id)
+            // const tmpUser = {
+            //     userId:user._id,
+            // }
+            // console.log(tmpUser)
+            // console.log(postId)
+            const comments = await axios.delete(`/comment/${postId}/deleteAll`)
+            // console.log("deleted comments")
+            const post123 = await axios.delete(`/post/${postId}/${user._id}`)
+            const fetchedUser = await axios.get('/user/'+user._id);
+            dispatch({type:'UPDATE',payload:fetchedUser.data});
+            window.location.replace('/home')
+        }catch(err){
+
+        }
+    }
+
 
     const pic = publicFolder + post.photo
     return (
@@ -108,6 +135,7 @@ const ViewPost = () => {
 
             <div className="viewpost_container">
                 <Card >
+                <div className="post_header">
                     <CardHeader
                         avatar={
                             <Box mr={2}>
@@ -117,6 +145,8 @@ const ViewPost = () => {
                         title={curruser.userName}
                         subheader={curruser.name}
                     />
+                    {(post.userId == user._id) && <button className="Post_delete" onClick={handleDelete} ><i className="fas fa-trash Post_delete_icon"></i></button>} 
+                </div>
                     <CardMedia
                         component="img"
                         image={publicFolder + post.photo}
@@ -132,10 +162,10 @@ const ViewPost = () => {
                     </CardContent>
                     <CardActions>
                         <div>
-                            {isLiked && <button className="Post_like" onClick={handleLike}><i class="fas fa-heart fa-2x"></i></button>}
-                            {!isLiked && <button className="Post_like" onClick={handleLike}><i class="far fa-heart fa-2x"></i></button>}
-                            {isSaved && <button className="Post_Save" onClick={handleSave}><i class="fas fa-bookmark fa-2x"></i></button>}
-                            {!isSaved && <button className="Post_save" onClick={handleSave}><i class="far fa-bookmark fa-2x"></i></button>}
+                        { user.likedposts.includes(`${post._id}`) && <button className="Post_like" onClick={handleLike}><i className="fas fa-heart fa-2x"></i></button> }
+                        { !user.likedposts.includes(`${post._id}`) && <button className="Post_like" onClick={handleLike}><i className="far fa-heart fa-2x"></i></button> }
+                        { user.savedposts.includes(`${post._id}`) && <button className="Post_save" onClick={handleSave}><i className="fas fa-bookmark fa-2x"></i></button> }
+                        { !user.savedposts.includes(`${post._id}`) && <button className="Post_save" onClick={handleSave}><i className="far fa-bookmark fa-2x"></i></button> }
                         </div>
                     </CardActions>
                 </Card>
@@ -152,7 +182,6 @@ const ViewPost = () => {
                                         </button>
                                     </div>
                                     <hr />
-
                                 </>
                             ))
                         }

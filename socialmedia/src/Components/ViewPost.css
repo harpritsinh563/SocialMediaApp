@@ -80,6 +80,20 @@
     align-items: center;
 
 }
+
+
+.Post_delete
+{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 23vw;
+}
+
+.Post_delete_icon{
+    font-size: x-large;
+}
+
 .viewpost_heading{
     border-bottom: 1px solid black;
 }

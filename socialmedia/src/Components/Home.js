@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Post from './Post';
-import NavbarHome from './NavbarHome';
 import './home.css';
 import axios from 'axios'
 import { Context } from '../context/Context';
+import NavbarHome from './NavbarHome';
 
 const Home = () =>  {
 

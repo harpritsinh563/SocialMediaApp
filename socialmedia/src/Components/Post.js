@@ -32,9 +32,10 @@ const Post = ({ post }) => {
                 userId : user._id,
             }
             const likedPost = await axios.put(`/post/${post._id}/likepost`,tmpUser)
-            setIsLiked(!isLiked)
+            const fetchedUser = await axios.get('/user/'+user._id);
+            dispatch({type:'UPDATE',payload:fetchedUser.data});
         }catch(err){
-
+            
         }
     }
     const handleSave = async() => {
@@ -42,18 +43,30 @@ const Post = ({ post }) => {
             const tmpUser = {
                 userId : user._id,
             }
-            const savedPost = await axios.put(`user/${post._id}/savedPost`,tmpUser)
+            const savedPost = await axios.put(`/user/${post._id}/savedPost`,tmpUser);
             const fetchedUser = await axios.get('/user/'+user._id);
             dispatch({type:'UPDATE',payload:fetchedUser.data});
-            setIsSaved(!isSaved)
+            
         }catch(err){
 
         }
     }
+
+    const handleDelete = async() => {
+        try{
+            const post = await axios.delete(`/post/${post._id}`)
+            window.location.replace('/home')
+            
+        }catch(err){
+
+        }
+    }
+
     return (
         <>
             <div style={{ marginTop: "5%", width: "40vw" }}>
                 <Card >
+                <div className="post_header">
                     <CardHeader
                         avatar={
                             <Box mr={2}>
@@ -63,6 +76,8 @@ const Post = ({ post }) => {
                         title={curruser.userName}
                         subheader={curruser.name}
                     />
+                {post.userid == user._id && <button className="Post_delete" onClick={handleDelete} ><i className="fas fa-trash Post_delete_icon"></i></button>} 
+                </div>
                     <CardMedia
                         component="img"
                         image={publicFolder + post.photo}
@@ -78,10 +93,10 @@ const Post = ({ post }) => {
                     </CardContent>
                     <CardActions>
                         <div className="post_saved_rightside" >
-                        { isLiked && <button className="Post_like" onClick={handleLike}><i className="fas fa-heart fa-2x"></i></button> }
-                        { !isLiked && <button className="Post_like" onClick={handleLike}><i className="far fa-heart fa-2x"></i></button> }
-                        { isSaved && <button className="Post_save" onClick={handleSave}><i className="fas fa-bookmark fa-2x"></i></button> }
-                        { !isSaved && <button className="Post_save" onClick={handleSave}><i className="far fa-bookmark fa-2x"></i></button> }
+                        { user.likedposts.includes(`${post._id}`) && <button className="Post_like" onClick={handleLike}><i className="fas fa-heart fa-2x"></i></button> }
+                        { !user.likedposts.includes(`${post._id}`) && <button className="Post_like" onClick={handleLike}><i className="far fa-heart fa-2x"></i></button> }
+                        { user.savedposts.includes(`${post._id}`) && <button className="Post_save" onClick={handleSave}><i className="fas fa-bookmark fa-2x"></i></button> }
+                        { !user.savedposts.includes(`${post._id}`) && <button className="Post_save" onClick={handleSave}><i className="far fa-bookmark fa-2x"></i></button> }
                         </div> 
                     </CardActions>
                 </Card>

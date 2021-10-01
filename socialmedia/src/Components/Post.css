@@ -3,6 +3,9 @@
     padding: 0;
 }
 
+.post_header{
+    display: flex;
+}
 
 .post{
     width:60vw;
@@ -18,6 +21,18 @@
     background-color: white;
     cursor: pointer;
     margin-left: 2vw;
+}
+
+.Post_delete
+{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 25vw;
+}
+
+.Post_delete_icon{
+    font-size: x-large;
 }
 
 .Post_save{

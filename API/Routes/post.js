@@ -41,18 +41,73 @@ router.post("/addPost",async(req,res)=>{
     }
 })
 
-router.delete("/:id",async(req,res)=>{
+router.delete("/:id/:uid",async(req,res)=>{
+    console.log("vrbvsb")
+
     try{
+        const post1 = await Post.findById(req.params.id)
         const post = await Post.findByIdAndDelete(req.params.id)
-        const user = await User.findOne({userName : req.body.userName})
+        // console.log("aebvbae"+post1._id)
+        console.log(req.params.uid)
+        const user = await User.findById(req.params.uid)
         const currentpostCount = user.postCount
-        await user.updateOne({
-            $pull: {posts: req.params.id},
-            postCount : currentpostCount - 1 
+        // user.posts.pull(post1._id);
+        console.log("lower"+post1._id)
+
+
+        if(user.posts.includes(post1._id))
+        {
+            console.log("in first if")
+            await user.updateOne({
+                $pull: {posts: post1._id},
+                postCount : currentpostCount - 1 
+            })
+            if(user.posts.includes(post1._id))
+            {
+                console.log("in second if")
+
+                let ind = user.posts.indexOf(post1._id)
+                user.posts.splice(ind,1)
+                user.postCount = user.postCount-1;
+                await user.save()
+            }
+        }
+        // // console.log("user delete")
+        let likedBy = post1.likedBy
+        // console.log(likedBy)
+
+        likedBy.forEach(async(e)=>
+        {            
+            const curruser = await User.findById(e)
+
+            if(curruser.likedposts.includes(post1._id))
+            {
+                let ind = curruser.likedposts.indexOf(post1._id)
+                curruser.likedposts.splice(ind,1)
+                await curruser.save()
+            }
+                
         })
-        res.status(200).send("Post Deleted successfully");
+        
+        
+        let savedBy = post1.savedBy
+        savedBy.forEach(async(e)=>
+        {
+            const curruser = await User.findById(e)
+
+            if(curruser.savedposts.includes(post1._id))
+            {
+                let ind = curruser.savedposts.indexOf(post1._id)
+                curruser.savedposts.splice(ind,1)
+                await curruser.save()
+            }
+            
+        })
+        
+
+        res.status(200).json("Post Deleted successfully");
     }catch(err){
-        res.status(403).send("Error deleting your Post")
+        res.status(200).json(err.messsage)
     }
 })
 
