@@ -32,7 +32,7 @@ const TopProfile = ({ topProfile }) => {
                         <div className="topProfile_username">{topProfile.userName}</div>
                         <div className="topProfile_icons">
                        
-                            {topProfile.userId==user._id && !topProfile.friends.includes(user._id) &&
+                            {topProfile.userId==user._id &&
                                 <Link to='/editProfile'>
                                     <Tooltip title="Edit info">
                                         <i className="far fa-user-edit topProfile_edit_icon"></i>
@@ -43,6 +43,12 @@ const TopProfile = ({ topProfile }) => {
                                 topProfile.userId !=user._id && !user.friends.includes(topProfile.userId) && 
                             <Tooltip title="Add Friend">
                                 <i onClick={handleAddfriend} className="far fa-user-plus topProfile_icon_add"> </i>
+                            </Tooltip>
+                            }
+                            {
+                                topProfile.userId !=user._id && user.friends.includes(topProfile.userId) && 
+                            <Tooltip title="Remove Friend">
+                                <i onClick={handleAddfriend} className="far fa-user-minus topProfile_icon_add"> </i>
                             </Tooltip>
                             }
                             {

@@ -5,6 +5,10 @@ const dotenv = require("dotenv")
 const userRoute = require("./Routes/user.js")
 const authRoute = require("./Routes/auth.js")
 const postRoute = require("./Routes/post.js")
+const conversationRoute = require("./Routes/conversation.js")
+const messageRoute = require("./Routes/message.js")
+
+
 const commentRoute = require("./Routes/comment.js")
 const multer = require("multer")
 const path = require("path")
@@ -43,3 +47,6 @@ app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/comment", commentRoute);
+app.use("/api/conversation", conversationRoute);
+app.use("/api/message", messageRoute);
+

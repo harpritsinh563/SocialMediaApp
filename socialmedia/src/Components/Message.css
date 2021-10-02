@@ -1,0 +1,55 @@
+.message{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 2%;
+}
+
+.messageTop{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.messageImg{
+    width:2vw;
+    height:4vh;
+    border-radius: 50%;
+    margin-right: 3%;
+
+}
+
+.messageText{
+    border-radius: 20px;
+    color: black;
+    padding: 2%;
+    background-color: aqua;
+    max-width: 30vw;
+    font-size: medium;
+}
+
+.messageBottom{
+    font-size: smaller;
+    margin-top: 1%;
+}
+
+.message.own{
+    align-items: flex-end;
+}
+
+.message.own .messageText{
+    background-color: gainsboro;
+    border-radius: 20px;
+    color: black;
+    padding: 2%;
+    max-width: 30vw;
+    font-size: medium;
+}
+.noConversation{
+    margin-top: 40%;
+    margin-left: 30%;
+    font-size: 30px;
+    font-weight: bold;
+    align-items: center;
+    color: grey;
+}

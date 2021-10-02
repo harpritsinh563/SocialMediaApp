@@ -35,12 +35,13 @@ const Signup = () => {
                     contact: phone,
                     age: age,
                     name: name,
+                    gender: gender,
                     password: pass,
                     email: email,
                     gender: gender,
                     profilepic: "AVATAR.png",
                 }
-                const user = await axios.post(`auth/register`, newUser)
+                const user = await axios.post(`/auth/register`, newUser)
                 if (user.status == 200) {
                     if (user.data == "signUp failed") {
                         toast.error('Username or email already exists', {
@@ -81,22 +82,16 @@ const Signup = () => {
                         <TextField
                             type="text"  label="Enter Age" required onChange={(e) => setAge(e.target.value)} >
                         </TextField> <br />
-                        <div className="radiobuttons">
-                            <RadioGroup row> 
-                                <FormControlLabel  value="male" control={<Radio />} label="Male" />
-                                <FormControlLabel  value="female" control={<Radio />} label="Female" />
-                            </RadioGroup>
-                        </div>
                         {/* <TextField
                             type="radio" id="male" value="male" name="gender" required onChange={(e) => setGender(e.target.value)} > Male
                         </TextField>
                         <TextField
                             type="radio" id="female" name="gender" required onChange={(e) => setGender(e.target.value)} >Female
                         </TextField> <br /> */}
-						{/*
-							<input type="radio" id="male" value="Male" name="gender" required onChange={(e)=>setGender(e.target.value)} />Male
-							<input type="radio" id="female" value="Female" name="gender" required  onChange={(e)=>setGender(e.target.value)} />Female
-						*/}
+						<div className="radiobuttons">
+                            <input type="radio" id="male" value="Male" name="gender" required onChange={(e)=>setGender(e.target.value)} />Male &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="female" value="Female" name="gender" required  onChange={(e)=>setGender(e.target.value)} />Female
+						</div>
                         <TextField
                             type="text"  label="Enter Username" required onChange={(e) => setUname(e.target.value)}>
                         </TextField> <br />

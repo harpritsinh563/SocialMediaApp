@@ -10,13 +10,14 @@ const Search = () => {
     const location = useLocation()
     const searchTerm = location.pathname.split('/')[2];
 
-    // console.log(searchTerm)
+    console.log(searchTerm)
 
     useEffect(() => {
         const getSearchProfile = async () => {
-            const profile = await axios.post(`/user/searchProfile`, { searchTerm })
+            const profile = await axios.post(`/user/searchProfile`, { searchTerm:searchTerm })
             // console.log(profile)   
             setsearchResult(profile.data)
+            // window.location.replace(`/searchProfile/${searchTerm}`)
         }
         getSearchProfile()
     }, [])

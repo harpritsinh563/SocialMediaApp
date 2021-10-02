@@ -14,6 +14,8 @@ import { useLocation } from 'react-router-dom'
 import ViewPost from './Components/ViewPost';
 import axios from 'axios';
 import AddPost from './Components/AddPost';
+import Messenger from './Components/Messenger';
+
 
 const App = () => {
 
@@ -59,6 +61,8 @@ const App = () => {
           <Route path="/viewPost/:postId">  <ViewPost /> </Route>
           <Route path="/main/:id"><App/></Route>
           <Route path='/AddPost' component={AddPost}></Route>
+          <Route path='/Messenger'> <Messenger /></Route>
+
         </Switch>
         {/* </user.Provider> */}
       </BrowserRouter>

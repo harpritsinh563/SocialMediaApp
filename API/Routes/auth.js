@@ -56,6 +56,7 @@ router.post("/register",async(req,res)=>{
     }
     catch(err)
     {
+        console.log(err.message)
         res.status(200).send("signUp failed");
     }
 })

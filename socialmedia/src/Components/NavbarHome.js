@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import {useState} from 'react'
 import { Context } from '../context/Context';
 import AddPost from './AddPost';
+import Messenger from './Messenger';
+
+
 const NavbarHome = () => {
 
     const [searchTerm, setsearchTerm] = useState("")
@@ -14,6 +17,10 @@ const NavbarHome = () => {
         dispatch({type:"LOGOUT"})
         window.location.replace('/')
     }
+    const handleSubmit=()=>{
+        window.location.replace("/searchProfile/"+searchTerm)
+    }
+
     return (
         <>
             <div className="navbar">
@@ -23,7 +30,7 @@ const NavbarHome = () => {
                 </div>
 
                 <div className="navcenter">
-                    <form id="form">
+                    {/* <form id="form"> */}
                         <input 
                             className="input_search" 
                             type="search" 
@@ -33,13 +40,15 @@ const NavbarHome = () => {
                             placeholder="Search..." 
                         />
 
-                        <Link to={`/searchProfile/${searchTerm}`} ><button className="btn_search"  ><i className="fa fa-search"></i></button></Link>
+                        <button onClick={handleSubmit} className="btn_search"><i className="fa fa-search"></i></button>
 
-                    </form>
+                    {/* </form> */}
                 </div>
                 <div className="addPost">
                    <Link className="link" to="/AddPost"> <i className="fas fa-plus-square"></i> </Link>
+                    <Link to="/Messenger" className="link"> <i className="fas fa-comments"></i> </Link>
                 </div>
+
                 <div className="dropdown navright">
                     <img className="nav_img" id="profile"
                         src="https://picsum.photos/200">

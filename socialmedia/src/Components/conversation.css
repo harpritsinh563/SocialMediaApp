@@ -1,0 +1,18 @@
+.conversation{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: 5%;
+}
+.conversation:hover{
+    background-color: gainsboro;
+    cursor: pointer;
+}
+.conversationImg{
+    width:2vw;
+    height:4vh;
+    border-radius: 50%;
+}
+.conversationName{
+    margin-left: 3%;
+}
