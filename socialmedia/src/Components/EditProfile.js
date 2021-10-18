@@ -6,6 +6,8 @@ import { Context } from '../context/Context'
 import { Tooltip } from '@material-ui/core'
 import './EditProfile.css'
 import {TextField} from '@material-ui/core'
+import NavbarHome from './NavbarHome';
+
 export const EditProfile = () => {
 
     const [userInfo, setuserInfo] = useState({})
@@ -68,7 +70,7 @@ export const EditProfile = () => {
 
     return (
             <>
-            <Navbar />
+            <NavbarHome/>
             <div className="editprofile_container">
                 <form onSubmit={handleUpdate}>
                 <div className="editprofile_card">

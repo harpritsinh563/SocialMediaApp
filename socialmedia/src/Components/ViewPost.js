@@ -76,7 +76,6 @@ const ViewPost = () => {
     }
 
     const handleLike = async () => {
-        console.log("vrundan")
         try {
             const tmpUser = {
                 userId: user._id,
@@ -109,14 +108,7 @@ const ViewPost = () => {
         console.log(postId)
         try{
             console.log("above")
-            // console.log(user._id)
-            // const tmpUser = {
-            //     userId:user._id,
-            // }
-            // console.log(tmpUser)
-            // console.log(postId)
             const comments = await axios.delete(`/comment/${postId}/deleteAll`)
-            // console.log("deleted comments")
             const post123 = await axios.delete(`/post/${postId}/${user._id}`)
             const fetchedUser = await axios.get('/user/'+user._id);
             dispatch({type:'UPDATE',payload:fetchedUser.data});

@@ -13,6 +13,44 @@ router.post("/",async(req,res)=>{
     }
 });
 
+router.get("/convo/:id",async(req,res)=>{
+    try
+    {
+        const convo = await Conversation.findById(req.params.id);
+        return res.json(convo);
+
+    }catch(err)
+    {
+
+    }
+
+
+})
+
+
+router.get("/:rId/:sId",async(req,res)=>{
+    try
+    {
+        
+        const conversations = await Conversation.find({
+            members : {$in : [req.params.rId]},
+        })
+        let conversation1 = [];
+        conversations.forEach((e)=>{
+            if(e.members[0]==req.params.sId || e.members[1]==req.params.sId)
+            {
+                conversation1.push(e)
+                return res.json(conversation1);
+            }
+        })
+        return res.json(conversation1);
+    }catch(er)
+    {
+
+    }
+})
+
+
 router.get("/:id",async(req,res)=>{
     try {
         const conversations = await Conversation.find({

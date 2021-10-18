@@ -9,13 +9,15 @@ const TopProfile = ({ topProfile }) => {
     const publicFolder = "http://localhost:5000/Images/"
     const pic = publicFolder + topProfile.photo;
     const { user, dispatch } = useContext(Context);
-    
+    const [userstate,setuserstate]=useState(user);
     const handleAddfriend = async() =>
     {
         try
         {
             const friendAdded = await axios.put('/user/'+user._id+'/addFriend/',{userId:topProfile.userId});
             dispatch({type:'UPDATE',payload:friendAdded.data});
+            // setuserstate(friendAdded);
+            window.location.href="/userProfile/"+topProfile.userId;
         }
         catch(err)
         {
@@ -41,14 +43,14 @@ const TopProfile = ({ topProfile }) => {
                             }
                             {
                                 topProfile.userId !=user._id && !user.friends.includes(topProfile.userId) && 
-                            <Tooltip title="Add Friend">
-                                <i onClick={handleAddfriend} className="far fa-user-plus topProfile_icon_add"> </i>
+                            <Tooltip title="Remove Friend">
+                                <i onClick={handleAddfriend} className="far fa-user-minus topProfile_icon_add"> </i>
                             </Tooltip>
                             }
                             {
                                 topProfile.userId !=user._id && user.friends.includes(topProfile.userId) && 
-                            <Tooltip title="Remove Friend">
-                                <i onClick={handleAddfriend} className="far fa-user-minus topProfile_icon_add"> </i>
+                            <Tooltip title="Add Friend">
+                                <i onClick={handleAddfriend} className="far fa-user-plus topProfile_icon_add"> </i>
                             </Tooltip>
                             }
                             {

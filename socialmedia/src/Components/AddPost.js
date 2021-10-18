@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core'
 import { Context } from '../context/Context';
 import axios from 'axios'
 import './AddPost.css'
-
+import NavbarHome from './NavbarHome';
 const AddPost = () => {
 
     const [Des, setDes] = useState("")
@@ -45,6 +45,7 @@ const AddPost = () => {
 
     return (
         <>
+            <NavbarHome/>
             <div className="AddPost">
                 {photo && <img src={URL.createObjectURL(photo)} className="previewphoto" alt="" />}
                 <form className="createPost" enctype="multipart/form-data" onSubmit={(e) => handlePostUpload(e)}>

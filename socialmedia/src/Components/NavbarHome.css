@@ -2,7 +2,11 @@
   margin: 0;
   padding: 0;
 }
-
+.icon
+{
+  color:white;
+  margin-right:10px;
+}
 .navbar {
   position: sticky;
   top: 0px;
@@ -53,12 +57,17 @@
 }
 
 .nav_img {
-  width: 3rem;
+  /* width: 3rem;
   height: 2.5rem;
   margin-right: 2%;
   margin-right: 2rem;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: pointer; */
+
+  width:3.5rem;
+  height:3rem;
+  border-radius: 50%;
+  cursor:pointer;
 }
 
 .dropdown {

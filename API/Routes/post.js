@@ -42,7 +42,6 @@ router.post("/addPost",async(req,res)=>{
 })
 
 router.delete("/:id/:uid",async(req,res)=>{
-    console.log("vrbvsb")
 
     try{
         const post1 = await Post.findById(req.params.id)

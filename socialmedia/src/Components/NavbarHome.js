@@ -12,6 +12,7 @@ const NavbarHome = () => {
     const [searchTerm, setsearchTerm] = useState("")
     const {user,dispatch} = useContext(Context)
     const currId = user._id;
+    const publicfolder = "http://localhost:5000/Images/"
     const handleLogout = () => 
     {
         dispatch({type:"LOGOUT"})
@@ -30,7 +31,7 @@ const NavbarHome = () => {
                 </div>
 
                 <div className="navcenter">
-                    {/* <form id="form"> */}
+                    
                         <input 
                             className="input_search" 
                             type="search" 
@@ -41,17 +42,15 @@ const NavbarHome = () => {
                         />
 
                         <button onClick={handleSubmit} className="btn_search"><i className="fa fa-search"></i></button>
-
-                    {/* </form> */}
                 </div>
                 <div className="addPost">
-                   <Link className="link" to="/AddPost"> <i className="fas fa-plus-square"></i> </Link>
-                    <Link to="/Messenger" className="link"> <i className="fas fa-comments"></i> </Link>
+                   <Link className="link" to="/AddPost"> <i className="fas icon fa-plus-square"></i> </Link>
+                    <Link to="/Messenger" className="link"> <i className="fas icon fa-comments"></i> </Link>
                 </div>
 
                 <div className="dropdown navright">
                     <img className="nav_img" id="profile"
-                        src="https://picsum.photos/200">
+                        src={publicfolder+user.profilepic}>
                     </img>
                     <div className="dropdown-content">
                         <Link className='link itemHover' to={`/userProfile/${currId}`} > Profile  </Link>

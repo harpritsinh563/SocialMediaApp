@@ -18,31 +18,6 @@ import Messenger from './Components/Messenger';
 
 
 const App = () => {
-
-  // console.log(window.location.pathname)
-  // const user = createContext();
-  // const location = useLocation();
-  // console.log(location)
-  // // const path = location.pathname.split('/')[1];
-  // // const path2 = location.pathname.split('/')[2];
-  // // console.log(path)
-  // // console.log(path2)
-  // const [fetcheduser, setfetcheduser] = useState({})
-  // // useEffect(() => {
-  // //   const fetchuser = async () => {
-  // //     // if (path == "main") {
-  // //     //   const fetched = await axios.get('/user/' + path2);
-  // //     //   // console.log(fetched);
-  // //     //   setfetcheduser(fetched.data)
-  // //     //   user = fetched.data
-  // //     //   console.log(fetcheduser)
-  // //     // }
-  // //   }
-  // //   fetchuser()
-  // // }, [])
-
-
-
   return (
     <>
       <BrowserRouter>
@@ -62,6 +37,7 @@ const App = () => {
           <Route path="/main/:id"><App/></Route>
           <Route path='/AddPost' component={AddPost}></Route>
           <Route path='/Messenger'> <Messenger /></Route>
+          <Route path='/Messenger/:cid'><Messenger/></Route>
 
         </Switch>
         {/* </user.Provider> */}

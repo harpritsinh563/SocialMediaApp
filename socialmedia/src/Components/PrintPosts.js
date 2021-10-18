@@ -5,7 +5,7 @@ const PrintPosts = ({posts}) => {
     return (
         <div className = "Posts">
             {posts.map((p)=>(
-                <SinglePost post = {p}/>
+                p && <SinglePost post = {p}/>
             ))}
         </div>
     )

@@ -29,10 +29,11 @@ const SavedPosts = () => {
         <>
         <NavbarHome/>
         <div className = 'ViewPosts'>
-            <div className = 'Title'>
+            <div className = 'SavedPost_title'>
                 Saved
             </div>
             <PrintPosts posts = {SavedPost}/>
+            {SavedPost.length==0 && <span>No Saved Posts</span>}
         </div>
         </>
     )

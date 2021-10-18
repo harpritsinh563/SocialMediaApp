@@ -16,6 +16,10 @@ import { Link } from 'react-router-dom'
             {
                 const fetchedpost = await axios.get(`/post/${post}`);
                 setCurrentPost(fetchedpost.data);
+                console.log("FETCHED POST : ")
+                console.log(fetchedpost.data)
+                // console.log("SET CURRENT POST : ")
+                // console.log(currentpost)
             }
             catch(err)
             {

@@ -8,10 +8,13 @@ import { Button } from '@material-ui/core'
 import { Context } from '../context/Context'
 import axios from 'axios'
 import {io} from 'socket.io-client'
+import {useLocation} from 'react-router-dom'
 
 
 const Messenger = () => {
 
+    const location = useLocation();
+    let urlarray=location.pathname.split('/');
     const [conversations, setconversations] = useState([])
     const [currChat, setCurrChat] = useState(null)
     const [messages, setMessages] = useState([])
@@ -33,6 +36,16 @@ const Messenger = () => {
                 createdAt:Date.now(),
             })
         })
+        
+        if(urlarray.length==3)
+        {
+            let convoid = urlarray[2];
+            const fetchConvo = async() => {
+                const convo = await axios.get(`/conversation/convo/${convoid}`);
+                setCurrChat(convo.data);
+            }
+            fetchConvo();
+        }
     },[])
 
 
@@ -43,16 +56,37 @@ const Messenger = () => {
     },[arrivalmessages,currChat])
 
 
+    let onlinefriends_t=[]
+
     useEffect(() => {
         socket.current.emit("addUser",user._id);
         socket.current.on("getUser",(users)=>{
-            console.log(users)
+            // console.log(users)
             setOnlineUsers(users)
             users.forEach((e)=>{
-                if(user.friends.includes(e))
-                    setOnlinefriend([...onlinefriend,e])
+                // console.log("OUTER FOREACH")
+                // console.log(user)
+                // console.log("e.userId : "+e.userId)
+                user.friends.forEach((e1)=>
+                {
+                    console.log("e1 : "+e1);
+                    if(e.userId==e1)
+                    {
+                        console.log("INSIDE e==e1")
+                        onlinefriends_t.push(e1)
+                        setOnlinefriend(onlinefriends_t)
+                    }
+                }
+                )
+
+                // if(user.friends.includes(e.userId))
+                // {
+                    
+                //     setOnlinefriend([...onlinefriend,e.userId])
+                // }
             })
-            // users && setOnlinefriend(user.friends.filter((f)=>users.includes(f._id)))    
+            // console.log("BELOW foreach")
+            // console.log(onlinefriend)
         })
     }, [user])
 

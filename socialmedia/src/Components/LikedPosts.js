@@ -29,10 +29,11 @@ const LikedPosts = () => {
         <>
         <NavbarHome/>
         <div className = 'ViewPosts'>
-            <div className = 'Title'>
+            <div className = 'LikedPost_Title'>
                 Liked
             </div>
             <PrintPosts posts = {likedPost} />
+            {likedPost.length==0 && <span>No Liked Posts</span>}
         </div>
         </>
     )

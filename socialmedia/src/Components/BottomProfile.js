@@ -9,7 +9,7 @@ const BottomProfile = ({bottomProfile}) => {
         <div className="bottomProfile">
         {bottomProfile && bottomProfile.map((p)=>(
                 <>
-                    <SinglePost post = {p} />
+                    {p && <SinglePost post = {p} />}
                 </>
             ))}
         
