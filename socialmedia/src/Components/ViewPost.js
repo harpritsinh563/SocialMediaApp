@@ -8,6 +8,9 @@ import Comment from './Comment'
 import { TextField, Button, Tooltip } from '@material-ui/core'
 import { Context } from '../context/Context'
 import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, IconButton, CardActions, Paper, MenuList, ListItemText } from '@material-ui/core';
+import {format} from "timeago.js"
+
+
 
 const ViewPost = () => {
     const location = useLocation()
@@ -80,9 +83,13 @@ const ViewPost = () => {
             const tmpUser = {
                 userId: user._id,
             }
-            const likedPost = await axios.put(`/post/${post._id}/likepost`, tmpUser)
+            console.log(tmpUser)
+            const likedPost = await axios.put(`/post/${post._id}/likepost`,tmpUser);
             const fetchedUser = await axios.get('/user/'+user._id);
+            // console.log(fetchedUser)
             dispatch({type:'UPDATE',payload:fetchedUser.data});
+            // console.log(fetchedUser)
+
             setIsLiked(!isLiked)
         } catch (err) {
 
@@ -104,6 +111,14 @@ const ViewPost = () => {
     }
 
     
+    const handleLikedBy = async() => {
+        try{
+            window.location.replace("/likedBy/"+post._id)
+        }catch(err){
+
+        }
+    }
+    
     const handleDelete = async() => {
         console.log(postId)
         try{
@@ -118,6 +133,13 @@ const ViewPost = () => {
         }
     }
 
+    const handleProfile = async() => {
+        try{
+            window.location.replace("/userProfile/"+post.userId)
+        }catch(err){
+
+        }
+    }
 
     const pic = publicFolder + post.photo
     return (
@@ -128,16 +150,20 @@ const ViewPost = () => {
             <div className="viewpost_container">
                 <Card >
                 <div className="post_header">
-                    <CardHeader
-                        avatar={
-                            <Box mr={2}>
-                                <Avatar src={publicFolder + curruser.profilepic} />
-                            </Box>
-                        }
-                        title={curruser.userName}
-                        subheader={curruser.name}
-                    />
+                    <div onClick={handleProfile}>
+                        <CardHeader
+                            avatar={
+                                <Box mr={2}>
+                                    <Avatar src={publicFolder + curruser.profilepic} />
+                                </Box>
+                            }
+                            
+                            title={curruser.userName}
+                            subheader={curruser.name}
+                        />
+                    </div>
                     {(post.userId == user._id) && <button className="Post_delete" onClick={handleDelete} ><i className="fas fa-trash Post_delete_icon"></i></button>} 
+                
                 </div>
                     <CardMedia
                         component="img"
@@ -152,6 +178,9 @@ const ViewPost = () => {
                             </Typography>
                         </Box>
                     </CardContent>
+                    <div className="Post_likedby">
+                        <Button onClick={handleLikedBy}> View LikedBy </Button>
+                    </div>
                     <CardActions>
                         <div>
                         { user.likedposts.includes(`${post._id}`) && <button className="Post_like" onClick={handleLike}><i className="fas fa-heart fa-2x"></i></button> }
@@ -160,6 +189,7 @@ const ViewPost = () => {
                         { !user.savedposts.includes(`${post._id}`) && <button className="Post_save" onClick={handleSave}><i className="far fa-bookmark fa-2x"></i></button> }
                         </div>
                     </CardActions>
+                    {format(post.createdAt)}
                 </Card>
                 <div className="viewpost_rightcomponent">
                     <h3 className="viewpost_heading"> Comments </h3>

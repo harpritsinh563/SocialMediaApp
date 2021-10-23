@@ -18,48 +18,76 @@ const Signup = () => {
     const publicfolder = "http://localhost:5000/Images/"
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try {
-            if (pass != Repass) {
-                toast.error('Passwords do not match', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            } else {
-                const newUser = {
-                    userName: uname,
-                    contact: phone,
-                    age: age,
-                    name: name,
-                    gender: gender,
-                    password: pass,
-                    email: email,
-                    gender: gender,
-                    profilepic: "AVATAR.png",
-                }
-                const user = await axios.post(`/auth/register`, newUser)
-                if (user.status == 200) {
-                    if (user.data == "signUp failed") {
-                        toast.error('Username or email already exists', {
-                            position: "top-center",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                    } else {
-                        window.location.replace('/')
+
+        const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        const numRegex = new RegExp("^([0|\+[0-9]{1,5})?([6-9][0-9]{9})$");
+        if(!strongRegex.test(pass) || (pass.length < 6 && pass.length > 13))
+        {
+            toast.error('Password should should be of 6 to 13 letters and should contain 1 lower Case,1 upper case,1 number , 1 special character ', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        else if(!numRegex.test(phone)){
+            toast.error('Please enter valid contact number', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        else{
+            try {
+                if (pass != Repass) {
+                    toast.error('Passwords do not match', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                } else {
+                    const newUser = {
+                        userName: uname,
+                        contact: phone,
+                        age: age,
+                        name: name,
+                        gender: gender,
+                        password: pass,
+                        email: email,
+                        gender: gender,
+                        profilepic: "AVATAR.png",
+                    }
+                    const user = await axios.post(`/auth/register`, newUser)
+                    if (user.status == 200) {
+                        if (user.data == "signUp failed") {
+                            toast.error('Username or email already exists', {
+                                position: "top-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
+                        } else {
+                            window.location.replace('/')
+                        }
                     }
                 }
+            } catch (err) {
+                console.log(err.message)
             }
-        } catch (err) {
-            console.log(err.message)
         }
     }
 

@@ -1,13 +1,12 @@
 .Users{
-    /* overflow-y:scroll; */
-    /* height: 70vh; */
     cursor: pointer;
-    
     width: 35vw;
     background-color: white;
     border-radius: 1.5vw;
     margin-right: 2%;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column; 
     margin-top: 2%;  
     overflow: hidden; 

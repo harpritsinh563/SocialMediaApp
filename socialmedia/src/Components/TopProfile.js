@@ -21,7 +21,7 @@ const TopProfile = ({ topProfile }) => {
         }
         catch(err)
         {
-
+            console.log(err)
         }
     }
 

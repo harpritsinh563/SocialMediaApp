@@ -15,9 +15,7 @@ const Search = () => {
     useEffect(() => {
         const getSearchProfile = async () => {
             const profile = await axios.post(`/user/searchProfile`, { searchTerm:searchTerm })
-            // console.log(profile)   
             setsearchResult(profile.data)
-            // window.location.replace(`/searchProfile/${searchTerm}`)
         }
         getSearchProfile()
     }, [])

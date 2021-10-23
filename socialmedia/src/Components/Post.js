@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState , useContext } from 'react';
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, CardActions } from '@material-ui/core';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, CardActions,Link,Button } from '@material-ui/core';
 import './Post.css';
 import { Context } from '../context/Context'
+import {format} from "timeago.js"
 
 
 const Post = ({ post }) => {
@@ -13,7 +14,6 @@ const Post = ({ post }) => {
     const { user, dispatch } = useContext(Context);
 
     useEffect(() => {
-
         const fetchUser = async () => {
             const currUser = await axios.get(`user/${post.userId}`)
             setcurruser(currUser.data)
@@ -21,7 +21,6 @@ const Post = ({ post }) => {
             user.savedposts.includes(post._id) && setIsSaved(true)
         }
         fetchUser()
-        
     }, [])
 
 
@@ -56,7 +55,22 @@ const Post = ({ post }) => {
         try{
             const post = await axios.delete(`/post/${post._id}`)
             window.location.replace('/home')
-            
+        }catch(err){
+
+        }
+    }
+
+    const handleLikedBy = async() => {
+        try{
+            window.location.replace("/likedBy/"+post._id)
+        }catch(err){
+
+        }
+    }
+
+    const handleProfile = async() => {
+        try{
+            window.location.replace("/userProfile/"+post.userId)
         }catch(err){
 
         }
@@ -64,18 +78,20 @@ const Post = ({ post }) => {
 
     return (
         <>
-            <div style={{ marginTop: "5%", width: "40vw" }}>
+            <div style={{ marginTop: "5%", width: "40vw",boxShadow: "8px 9px 21px -3px rgba(159,146,146,1)" }}>
                 <Card >
                 <div className="post_header">
-                    <CardHeader
-                        avatar={
-                            <Box mr={2}>
-                                <Avatar src={publicFolder + curruser.profilepic} />
-                            </Box>
-                        }
-                        title={curruser.userName}
-                        subheader={curruser.name}
-                    />
+                    <div onClick={handleProfile}>
+                        <CardHeader
+                            avatar={
+                                <Box mr={2}>
+                                    <Avatar src={publicFolder + curruser.profilepic} />
+                                </Box>
+                            }
+                            title={curruser.userName}
+                            subheader={curruser.name}
+                        />
+                    </div>
                 {post.userid == user._id && <button className="Post_delete" onClick={handleDelete} ><i className="fas fa-trash Post_delete_icon"></i></button>} 
                 </div>
                     <CardMedia
@@ -91,6 +107,9 @@ const Post = ({ post }) => {
                             </Typography>
                         </Box>
                     </CardContent>
+                    <div className="Post_likedby">
+                        <Button onClick={handleLikedBy}> View LikedBy </Button>
+                    </div>
                     <CardActions>
                         <div className="post_saved_rightside" >
                         { user.likedposts.includes(`${post._id}`) && <button className="Post_like" onClick={handleLike}><i className="fas fa-heart fa-2x"></i></button> }
@@ -99,6 +118,7 @@ const Post = ({ post }) => {
                         { !user.savedposts.includes(`${post._id}`) && <button className="Post_save" onClick={handleSave}><i className="far fa-bookmark fa-2x"></i></button> }
                         </div> 
                     </CardActions>
+                    {format(post.createdAt)}
                 </Card>
             </div>
         </>

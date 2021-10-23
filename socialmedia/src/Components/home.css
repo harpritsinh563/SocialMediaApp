@@ -7,44 +7,10 @@
 .container{
   width: 100%;
   height: 100%;
-  margin: auto;
+  margin-bottom: 5%;
   display:flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-
-/* .cards{
-    width: 30vw;
-    height: 30vh;
-    display: inline-block;
-    justify-content: center;
-    text-align: center;
-    top:0;
-    bottom: 0;
-    left: 33%;
-    right: 0;
-    padding: 2%;
-    margin: auto;
-    position: relative;
-  }
-  
-  .card_img{
-    width: 100%;
-    border-radius: 2vw;
-  }
-  
-  .facility_div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-  }
-  
-  .facility_icon{
-    font-size: 2rem;
-    margin-left: 10px;
-    margin-top: 1.5vh;
-  }
-   */

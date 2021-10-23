@@ -25,7 +25,7 @@ const Messenger = () => {
     const scrollRef = useRef()
     const socket = useRef()
     const [onlinefriend, setOnlinefriend] = useState([])
-
+    const [currConvo,setcurrConvo] = useState({})
 
     useEffect(() => {
         socket.current = io("ws://localhost:8900");
@@ -61,12 +61,8 @@ const Messenger = () => {
     useEffect(() => {
         socket.current.emit("addUser",user._id);
         socket.current.on("getUser",(users)=>{
-            // console.log(users)
             setOnlineUsers(users)
             users.forEach((e)=>{
-                // console.log("OUTER FOREACH")
-                // console.log(user)
-                // console.log("e.userId : "+e.userId)
                 user.friends.forEach((e1)=>
                 {
                     console.log("e1 : "+e1);
@@ -76,22 +72,10 @@ const Messenger = () => {
                         onlinefriends_t.push(e1)
                         setOnlinefriend(onlinefriends_t)
                     }
-                }
-                )
-
-                // if(user.friends.includes(e.userId))
-                // {
-                    
-                //     setOnlinefriend([...onlinefriend,e.userId])
-                // }
+                })
             })
-            // console.log("BELOW foreach")
-            // console.log(onlinefriend)
         })
     }, [user])
-
-
-
 
     useEffect(() => {
         const getconversation = async() => {
@@ -105,13 +89,14 @@ const Messenger = () => {
         getconversation()
     }, [user._id])
 
-
-
     useEffect(() => {
         const getMessages = async() =>{
             try{
                 const fetchmessages = await axios.get(`/message/${currChat?._id}`)
                 setMessages(fetchmessages.data)
+                const friendId = currChat.members.find((m)=>m !== user._id)
+                const friend = await axios.get(`/user/${friendId}`)
+                setcurrConvo(friend.data)
             }catch(err){
                 console.log(err.Message)
             }
@@ -119,13 +104,12 @@ const Messenger = () => {
         getMessages()
     }, [currChat])
 
-
-
     useEffect(() => {
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
     }, [messages])
 
 
+    const publicFolder = "http://localhost:5000/Images/"
     
     const handleSubmit = async(e) =>{
         e.preventDefault()
@@ -166,13 +150,20 @@ const Messenger = () => {
                     </div>
                 </div>
                 <div className="chatBox">
-                    <div className="chatBoxWrapper">
+                        
+                    <div className="chatBoxWrapper">  
+                    
                     { currChat ? 
                         <>
+                        <div className="conversation"> 
+                        <img src={publicFolder+currConvo?.profilepic}  alt="" className="conversationImg"></img>
+                        <span className="conversationName">{currConvo?.userName}</span> 
+                    </div>
+              
                         <div className="chatBoxTop">
                         {messages.map((m)=>(
                             <div ref = {scrollRef}>
-                            <Message message={m} own={m.sender === user._id}/>
+                            <Message message={m} own={m.sender === user._id} sender = {m.sender}/>
                             </div>
                         ))}
                             

@@ -40,7 +40,6 @@ const AddPost = () => {
             console.log(err)
         }
         window.location.replace("/home")
-
     }
 
     return (

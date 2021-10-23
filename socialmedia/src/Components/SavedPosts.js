@@ -5,18 +5,34 @@ import './SavedPosts.css'
 import { useLocation } from 'react-router';
 import axios from 'axios';
 
+
+
 const SavedPosts = () => {
     
     const location = useLocation()
     const userId = location.pathname.split('/')[2]
     const [user, setuser] = useState({})
     const [SavedPost, setSavedPost] = useState([])
+
+
+    function compare( a, b ) 
+    {
+        if ( a > b ){
+          return -1;
+        }
+        if ( a < b ){
+          return 1;
+        }
+        return 0;
+    }
+
     useEffect(() => {
         const fetchUser = async() =>{
             try{
                 const currUser = await axios.get(`/user/${userId}`)
 
                 setuser(currUser.data)
+                currUser.data.savedposts.sort(compare)
                 setSavedPost(currUser.data.savedposts)
             }
             catch(err){

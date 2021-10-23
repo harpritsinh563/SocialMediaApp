@@ -14,24 +14,16 @@ router.post("/",async(req,res)=>{
 });
 
 router.get("/convo/:id",async(req,res)=>{
-    try
-    {
+    try{
         const convo = await Conversation.findById(req.params.id);
         return res.json(convo);
-
-    }catch(err)
-    {
-
+    }catch(err){
+        res.status(200).json(err)
     }
-
-
 })
 
-
 router.get("/:rId/:sId",async(req,res)=>{
-    try
-    {
-        
+    try{
         const conversations = await Conversation.find({
             members : {$in : [req.params.rId]},
         })
@@ -44,12 +36,10 @@ router.get("/:rId/:sId",async(req,res)=>{
             }
         })
         return res.json(conversation1);
-    }catch(er)
-    {
-
+    }catch(err){
+        res.status(200).json(err)
     }
 })
-
 
 router.get("/:id",async(req,res)=>{
     try {
@@ -61,7 +51,5 @@ router.get("/:id",async(req,res)=>{
         res.status(200).json(err)
     }
 })
-
-
 
 module.exports=router

@@ -3,6 +3,8 @@ import PostTop from './PostTop'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import './Comment.css'
+import {format} from "timeago.js"
+
 
 const Comment = ({ comment }) => {
     const [user, setuser] = useState({})
@@ -29,6 +31,8 @@ const Comment = ({ comment }) => {
                 <div className="caption">
                     <h4>{comment.comment}</h4>
                 </div>
+                {format(comment.createdAt)}
+
             </div>
         </>
     )

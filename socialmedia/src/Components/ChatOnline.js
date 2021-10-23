@@ -22,11 +22,8 @@ const ChatOnline = ({onlineuser,setcurrChat}) => {
         let exists = await axios.get(`/conversation/${onlineuser}/${user._id}`);
         console.log("PRINT")
         console.log(exists)
-        // console.log(exists.data);
-        // console.log(exists.data[0]._id);
         if(exists.data.length==0)
         {
-            // console.log("INSIDE IF of exists data")
             exists = await axios.post("/conversation/",{
             senderId:user._id,
             receiverId:onlineuser,
@@ -34,9 +31,7 @@ const ChatOnline = ({onlineuser,setcurrChat}) => {
         window.location.href="/Messenger/"+exists.data._id;
         }
         else
-        {
             window.location.href="/Messenger/"+exists.data[0]._id;
-        }
     }
 
 

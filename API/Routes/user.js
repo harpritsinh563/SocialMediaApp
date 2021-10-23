@@ -8,8 +8,19 @@ const Post = require("../Models/Post")
 // delete data -> delete 
 // get data  -> get
 
-router.put("/:id",async(req,res)=>{
+function compare( a, b ) 
+{
+    if ( a.createdAt > b.createdAt ){
+      return -1;
+    }
+    if ( a.createdAt < b.createdAt ){
+      return 1;
+    }
+    return 0;
+}  
 
+
+router.put("/:id",async(req,res)=>{
     try{
         const updateduser = await User.findByIdAndUpdate(req.params.id,{
             $set: req.body
@@ -18,6 +29,15 @@ router.put("/:id",async(req,res)=>{
     }
     catch(err){
         res.status(403).send("Update Failed")
+    }
+})
+
+router.get("/",async(req,res)=>{
+    try{
+        const user = await User.find()
+        res.status(200).json(user);
+    }catch(err){
+        console.log(err)
     }
 })
 
@@ -47,8 +67,6 @@ router.put("/:id/addFriend",async(req,res)=>{
         const currentFriendcount = user.friendCount;
         const otheruser = await User.findById(req.body.userId);
         const otheruserFriends = otheruser.friendCount
-        // console.log(user);
-        // console.log(req.params.id)
         if(!(user.friends.includes(req.body.userId)))
         {
             await user.updateOne({$push:{friends:req.body.userId},friendCount : currentFriendcount + 1})
@@ -59,16 +77,12 @@ router.put("/:id/addFriend",async(req,res)=>{
         }
         else
         {
-
             await user.updateOne({$pull:{friends:req.body.userId},friendCount : currentFriendcount - 1})
             await otheruser.updateOne({
                 $pull:{friends:req.params.id},
                 friendCount : otheruserFriends-1
             })
         }
-
-
-
         res.status(200).json(user)
     }
     catch{
@@ -100,6 +114,8 @@ router.put("/:id/savedPost",async(req,res)=>{
         }
 
         const updatedUser = await User.findById(req.body.userId)
+        
+        // updatedUser.sort(compare);
         res.status(200).json(updatedUser)
     }
     catch(err){
@@ -110,7 +126,7 @@ router.put("/:id/savedPost",async(req,res)=>{
 router.post("/searchProfile",async(req,res)=>{
     try{
         const regexterm = new RegExp( req.body.searchTerm,'i')
-        const users = await User.find({name: {$regex:regexterm}})
+        const users = await User.find({ userName: {$regex:regexterm}} )
         res.status(200).json(users)
     }catch(err){
 

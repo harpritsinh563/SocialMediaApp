@@ -1,17 +1,27 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import './Message.css'
 import {format} from "timeago.js"
+import axios from 'axios'
+const Message = ({message,own,sender}) => {
+    const [fetcheduser, setfetcheduser] = useState({})
 
-const Message = ({message,own}) => {
+    useEffect(() => {
+        const fetchUser = async() =>{
+            const fetched = await axios.get(`/user/${sender}`)
+            setfetcheduser(fetched.data)
+        } 
+        fetchUser();
+    }, [])
+    const publicFolder = "http://localhost:5000/Images/"
+
     return (
         <>
             <div className={own?"message own":"message"}>
                 <div className="messageTop">
-                    <img src="../Images/wallpaper.jpg" alt="" className="messageImg"></img>
+                    {/* <img src={publicFolder+fetcheduser?.profilepic} alt="" className="messageImg"></img> */}
                     <p className="messageText">{message.text}</p>
                 </div>
                 <div className="messageBottom">
-                    {/* 111111111111 */}
                     {format(message.createdAt)}
                 </div>
             </div>

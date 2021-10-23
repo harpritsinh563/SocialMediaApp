@@ -15,8 +15,20 @@ export const UserProfile = () => {
   const {user,dispatch} = useContext(Context);
   const location = useLocation();
   const currentid = location.pathname.split('/')[2];
-  console.log(currentid)
+  // console.log(currentid)
+
+function compare( a, b ) 
+{
+    if ( a > b ){
+      return -1;
+    }
+    if ( a < b ){
+      return 1;
+    }
+    return 0;
+}
   
+
   useEffect(()=>{
     const fetchProfile = async() =>
     {
@@ -24,6 +36,7 @@ export const UserProfile = () => {
       {
         const res = await axios.get('/user/'+currentid)
         setprofileInfo(res.data);
+        res.data.posts.sort(compare)
         setBottomPosts(res.data.posts);
       }
       catch(err)

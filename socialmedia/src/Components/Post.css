@@ -16,6 +16,15 @@
     border:1px solid black;
 }
 
+.Post_likedby{
+    color:white;
+    text-decoration: none;
+    margin-left: 8%;
+    margin-bottom: 1%;
+    cursor: pointer;
+}
+
+
 .Post_like{
     border: none;
     background-color: white;

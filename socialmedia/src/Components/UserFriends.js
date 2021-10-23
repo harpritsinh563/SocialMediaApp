@@ -10,7 +10,6 @@ import {useLocation} from 'react-router-dom'
 const UserFriends = () => {
     
     const {user,dispatch} = useContext(Context);
-    // const currId = user._id;
     const location = useLocation();
     const currId = location.pathname.split('/')[2];
     const [friends, setfriends] = useState([])
@@ -26,7 +25,6 @@ const UserFriends = () => {
         fetchFriends()
     }, [])
 
-    // console.log(friends)
     return (
         <>
         <NavbarHome/>

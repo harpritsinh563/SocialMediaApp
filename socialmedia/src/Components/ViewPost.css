@@ -81,6 +81,9 @@
 
 }
 
+.post_header{
+    cursor: pointer;
+}
 
 .Post_delete
 {
@@ -101,5 +104,4 @@
 .viewpost_heading::first-letter
 {
     font-size: 180%;
-
 }

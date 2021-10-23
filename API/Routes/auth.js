@@ -39,9 +39,9 @@ router.post("/register",async(req,res)=>{
         console.log(process.env.GMAIL_PASS)
         
         const mailOptions = {
-            from : process.env.GMAIL_USER,
+            from : "SNAPBOOK",
             to : user.email,
-            subject : 'Verify your mail',
+            subject : 'Verify your mail for SNAPBOOK',
             html : `<p> Thanks for Registering </p>
                     <p> Please verify yourself to continue </p>
                     <a href="http://${req.headers.host}/api/auth/verify-email?token=${user.emailToken}">click here</a>`

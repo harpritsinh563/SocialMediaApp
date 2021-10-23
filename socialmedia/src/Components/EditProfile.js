@@ -60,9 +60,9 @@ export const EditProfile = () => {
                 }
             }
             const res = await axios.put(`/user/${currId}`, updatedUser)
-            dispatch({ type: "UPADTE",payload: res.data })
+            dispatch({ type: "UPDATE",payload: res.data })
             setuserInfo(res.data);
-            
+            window.location.replace(`/userProfile/${user._id}`)
         } catch (err) {
             console.log(err.data);
         }
@@ -87,7 +87,7 @@ export const EditProfile = () => {
                     <TextField id="standard-basic" value={name} onChange={(e)=>setName(e.target.value)} label="Name" variant="standard" />
                     <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={uname} onChange={(e) => setUname(e.target.value)} label="Username" variant="standard" />
                     <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={phone} onChange={(e) => setPhone(e.target.value)} label="Phone" variant="standard" />
-                    <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={age} onChange={(e) => setAge(e.target.value)} label="Phone" variant="standard" />
+                    <TextField style={{marginTop:"1.5vh"}} id="standard-basic" value={age} onChange={(e) => setAge(e.target.value)} label="Age" variant="standard" />
                     <button className="editprofile_submit_button" type="submit" >Update!</button>
                     </div>
                 </div>

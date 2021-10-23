@@ -4,6 +4,7 @@ import Friend from "./Friend"
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router'
+import NavbarHome from './NavbarHome'
 
 const LikedBy = () => {
 
@@ -25,12 +26,16 @@ const LikedBy = () => {
     }, [])
     return (
         <>
-            <div className='Container'>
+        <NavbarHome />
+                <div className='Container'>
                 <div className="title_user">Liked By</div>
                 <div className='Users'>
-                    {likedBy.map((f) => (
+                    {likedBy && likedBy.map((f) => (
                         <Friend friend={f} />
                     ))}
+                
+                {likedBy.length == 0 && <span>No Likes</span>}
+
                 </div>
             </div>
         </>

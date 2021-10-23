@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
         console.log(users)
         io.emit("getUser",users)
     })
-
+    
 //send message
     socket.on("sendMessage",({senderId,receiverId,text})=>{
         const user = getUser(receiverId);

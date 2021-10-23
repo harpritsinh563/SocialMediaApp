@@ -11,11 +11,25 @@ const LikedPosts = () => {
     const userId = location.pathname.split('/')[2]
     const [user, setuser] = useState({})
     const [likedPost, setlikedPost] = useState([])
+
+
+    function compare( a, b ) 
+    {
+        if ( a > b ){
+          return -1;
+        }
+        if ( a < b ){
+          return 1;
+        }
+        return 0;
+    }
+
     useEffect(() => {
         const fetchUser = async() =>{
             try{
                 const currUser = await axios.get(`/user/${userId}`)
                 setuser(currUser.data)
+                currUser.data.likedposts.sort(compare)
                 setlikedPost(currUser.data.likedposts)
             }
             catch(err){
@@ -25,6 +39,9 @@ const LikedPosts = () => {
 
         fetchUser()
     }, [])
+
+
+    
     return (
         <>
         <NavbarHome/>

@@ -8,6 +8,18 @@ const User = require("../Models/User")
     get -> get data
 */
 
+function compare( a, b ) 
+{
+    if ( a.createdAt > b.createdAt ){
+      return -1;
+    }
+    if ( a.createdAt < b.createdAt ){
+      return 1;
+    }
+    return 0;
+}  
+
+
 router.put("/:id",async(req,res) =>{
 
     try{
@@ -42,15 +54,12 @@ router.post("/addPost",async(req,res)=>{
 })
 
 router.delete("/:id/:uid",async(req,res)=>{
-
     try{
         const post1 = await Post.findById(req.params.id)
         const post = await Post.findByIdAndDelete(req.params.id)
-        // console.log("aebvbae"+post1._id)
         console.log(req.params.uid)
         const user = await User.findById(req.params.uid)
         const currentpostCount = user.postCount
-        // user.posts.pull(post1._id);
         console.log("lower"+post1._id)
 
 
@@ -71,10 +80,7 @@ router.delete("/:id/:uid",async(req,res)=>{
                 await user.save()
             }
         }
-        // // console.log("user delete")
         let likedBy = post1.likedBy
-        // console.log(likedBy)
-
         likedBy.forEach(async(e)=>
         {            
             const curruser = await User.findById(e)
@@ -84,26 +90,19 @@ router.delete("/:id/:uid",async(req,res)=>{
                 let ind = curruser.likedposts.indexOf(post1._id)
                 curruser.likedposts.splice(ind,1)
                 await curruser.save()
-            }
-                
+            }   
         })
-        
-        
         let savedBy = post1.savedBy
         savedBy.forEach(async(e)=>
         {
             const curruser = await User.findById(e)
-
             if(curruser.savedposts.includes(post1._id))
             {
                 let ind = curruser.savedposts.indexOf(post1._id)
                 curruser.savedposts.splice(ind,1)
                 await curruser.save()
             }
-            
         })
-        
-
         res.status(200).json("Post Deleted successfully");
     }catch(err){
         res.status(200).json(err.messsage)
@@ -141,6 +140,7 @@ router.get("/:id/feedPosts",async(req,res)=>{
                 posts = tmp_post
             })
         )
+        posts.sort(compare);
         // console.log(posts)
         res.status(200).json(posts)
     }catch(err){
@@ -155,13 +155,14 @@ router.put("/:id/likepost",async(req,res)=>
 {
     try{
         const post = await Post.findById(req.params.id)
+        // console.log(post)
         let likes = post.likeCount
-        const user = await User.findById(req.body.userId)
+        const user = await User.findById(req.body.userId)        
+        // console.log(user)
         if(post.likedBy.includes(req.body.userId))
         {
             await post.updateOne({
                 $pull:{likedBy:req.body.userId},likeCount:likes - 1
-
             }) 
             await user.updateOne({
                 $pull:{likedposts:req.params.id}
@@ -175,8 +176,8 @@ router.put("/:id/likepost",async(req,res)=>
                 $push:{likedposts:req.params.id}
             })
         }
+        // console.log("below update");
         const updatedPost = await Post.findById(req.params.id)
-
         res.status(200).json(updatedPost)   
     }
     catch(err){

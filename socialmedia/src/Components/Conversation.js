@@ -13,7 +13,6 @@ const Conversation = ({conversation,currUser}) => {
         const getFriend = async() =>{
             try{
                 const fetchfriend = await axios(`/user/${friendId}`)
-                // console.log(fetchfriend.data)
                 setfriend(fetchfriend.data)
             }
             catch(err){
@@ -22,8 +21,8 @@ const Conversation = ({conversation,currUser}) => {
         };
         getFriend()
     }, [currUser,conversation])
-
     const publicFolder = "http://localhost:5000/Images/"
+
     return (
         <>
             <div className="conversation"> 
