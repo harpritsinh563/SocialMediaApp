@@ -5,7 +5,6 @@ import {useState} from 'react'
 import { Context } from '../context/Context';
 import AddPost from './AddPost';
 import Messenger from './Messenger';
-import Suggestions from './Suggestion';
 import axios from 'axios'
 
 const NavbarHome = () => {

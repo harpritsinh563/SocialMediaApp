@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './login.css';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
 import axios from 'axios';
 import { Context } from '../context/Context';
 import { ToastContainer, toast } from 'react-toastify';
@@ -80,7 +79,6 @@ const Login = () => {
     }
     return (
         <>
-            {/* <Navbar /> */}
             <div className="container1">
                 <div className="login_box"><br /><br />
                 
