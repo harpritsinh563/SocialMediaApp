@@ -76,6 +76,13 @@ const Post = ({ post }) => {
         }
     }
 
+    const handlepost= async() => {
+        try{
+            window.location.replace("/viewPost/"+post._id)
+        }catch(err){
+
+        }
+    }
     return (
         <>
             <div style={{ marginTop: "5%", width: "40vw",boxShadow: "8px 9px 21px -3px rgba(159,146,146,1)" }}>
@@ -94,12 +101,14 @@ const Post = ({ post }) => {
                     </div>
                 {post.userid == user._id && <button className="Post_delete" onClick={handleDelete} ><i className="fas fa-trash Post_delete_icon"></i></button>} 
                 </div>
+                <div onClick={handlepost} style={{cursor :"pointer"}}>
                     <CardMedia
                         component="img"
                         image={publicFolder + post.photo}
                         height="250"
                         width="400"
                     />
+                </div>
                     <CardContent>
                         <Box ml={4}>
                             <Typography  >

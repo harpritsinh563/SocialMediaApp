@@ -5,19 +5,20 @@ import axios from 'axios';
 import { Context } from '../context/Context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Button,TextField} from '@material-ui/core';
+import {Button,TextField,CircularProgress} from '@material-ui/core';
 
 const Login = () => {
 
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
     const [fetcheduser, setfetcheduser] = useState({})
-
+    const [isLoading, setisLoading] = useState(false)
     const { dispatch } = useContext(Context)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let status, fetched;
+        setisLoading(true)
         const fetchUser = async () => {
             try {
                 fetched = await axios.post("auth/login", { userName: username, password: password });
@@ -27,7 +28,9 @@ const Login = () => {
                 console.log(fetched+"\n"+status);
 
                 if (status == 200){
+                    setisLoading(false)                        
                     if (fetched.data == "User not found"){
+
                         toast.error('Incorrect Username', {
                             position: "top-center",
                             autoClose: 5000,
@@ -79,26 +82,28 @@ const Login = () => {
     }
     return (
         <>
+        { !isLoading?
             <div className="container1">
                 <div className="login_box"><br /><br />
                 
-                <h2>Login!!</h2><br/>
+                <h2 class="Login_Title">Login!!</h2><br/>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div>
                             <ToastContainer></ToastContainer>
                         </div>
-                        <TextField  
+                        <div class="Login_Fields">
+                        <TextField
                             required value={username} 
                             onChange={(e) => setusername(e.target.value)} 
                             label="Enter Username"> 
-                        </TextField> <br /> <br/>
+                        </TextField>
                         <TextField 
                             required value={password} 
                             onChange={(e) => setpassword(e.target.value)} 
                             type="password" 
                             label="Enter Password" > 
                         </TextField>
-                        
+                        </div>
                         <br /><br />
                         <Button variant='contained' color="primary"  type="submit">LOGIN!</Button>
                         <br />
@@ -107,7 +112,9 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+         : <div class="container_circular"><CircularProgress /></div>}
         </>
+    
     )
 }
 

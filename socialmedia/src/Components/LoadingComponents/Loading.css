@@ -1,0 +1,24 @@
+
+.rectangular_image{
+    width: 14vw;
+    height: 14vw;
+    margin-bottom: 4%;
+    margin-top: 14%;
+    background-color:grey; 
+    animation:skeleton 1s ease infinite alternate;      
+}
+@keyframes skeleton {
+    to{
+        opacity:0.5;
+    }
+}
+.circular_image
+{
+    height: 7.2vh;
+    width: 4.2vw;
+    border-radius: 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    animation:skeleton 1s ease infinite alternate;      
+    background-color: grey;
+}

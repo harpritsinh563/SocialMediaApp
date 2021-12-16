@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Button } from '@material-ui/core'
+import { Button,CircularProgress } from '@material-ui/core'
 import { Context } from '../context/Context';
 import axios from 'axios'
 import './AddPost.css'
@@ -8,11 +8,12 @@ const AddPost = () => {
 
     const [Des, setDes] = useState("")
     const [photo, setphoto] = useState(null)
-
+    const [isLoading,setisLoading]=useState(false)
     const { user } = useContext(Context)
 
     const handlePostUpload = async (e) => {
         e.preventDefault()
+        setisLoading(true)
         const data = new FormData()
         const fname = user._id + Date.now()
 
@@ -39,7 +40,7 @@ const AddPost = () => {
         } catch (err) {
             console.log(err)
         }
-        window.location.replace("/home")
+        window.location.replace("/userProfile/"+user._id)
     }
 
     return (
@@ -58,7 +59,7 @@ const AddPost = () => {
                         <textarea className="captionField" onChange={(e) => setDes(e.target.value)} placeholder="What's on your mind..." ></textarea>
                     </div>
                     <div className="submitbutton">
-                        <Button variant='contained' color="primary"  type="submit">Post</Button>
+                       {isLoading?<CircularProgress/>:<Button variant='contained' color="primary"  type="submit">Post</Button>}
                     </div>
                 </form>
             </div>

@@ -2,10 +2,12 @@ import React,{useEffect,useState} from 'react'
 import './singlePost.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import LazyLoad from 'react-lazy-load';
+import Rectangle from './LoadingComponents/Rectangle'
 
     const SinglePost = ({post}) => {
     const [currentpost,setCurrentPost]=useState({});
-
+        const [isLoading, setisLoading] = useState(true)
     const publicFolder = "http://localhost:5000/Images/"
     
     useEffect(()=>
@@ -16,10 +18,7 @@ import { Link } from 'react-router-dom'
             {
                 const fetchedpost = await axios.get(`/post/${post}`);
                 setCurrentPost(fetchedpost.data);
-                console.log("FETCHED POST : ")
-                console.log(fetchedpost.data)
-                // console.log("SET CURRENT POST : ")
-                // console.log(currentpost)
+                setisLoading(false)
             }
             catch(err)
             {
@@ -34,9 +33,14 @@ import { Link } from 'react-router-dom'
     
     return (
         <>
+        {
+            isLoading?<Rectangle/>:
             <Link to ={`/viewPost/${currentpost._id}`}>
+               
                 <img className="Img"  src={pic} alt="Loading..." ></img>
+              
             </Link>
+        }
         </>    
     )
 }

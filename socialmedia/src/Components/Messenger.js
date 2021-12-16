@@ -75,7 +75,7 @@ const Messenger = () => {
                 })
             })
         })
-    }, [user])
+    }, [])
 
     useEffect(() => {
         const getconversation = async() => {

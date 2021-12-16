@@ -16,7 +16,6 @@ const TopProfile = ({ topProfile }) => {
         {
             const friendAdded = await axios.put('/user/'+user._id+'/addFriend/',{userId:topProfile.userId});
             dispatch({type:'UPDATE',payload:friendAdded.data});
-            // setuserstate(friendAdded);
             window.location.href="/userProfile/"+topProfile.userId;
         }
         catch(err)
@@ -28,7 +27,7 @@ const TopProfile = ({ topProfile }) => {
     return (
         <>
             <div className="topProfile">
-                <img className="topProfile_profilepic" src={pic} alt=" " />
+                { <img className="topProfile_profilepic" src={pic} alt=" " />}
                 <div className="topProfile_details">
                     <div className="topProfile_icons_uname">
                         <div className="topProfile_username">{topProfile.userName}</div>

@@ -7,9 +7,9 @@ import { useState, useEffect, useContext } from 'react'
 import Comment from './Comment'
 import { TextField, Button, Tooltip } from '@material-ui/core'
 import { Context } from '../context/Context'
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, IconButton, CardActions, Paper, MenuList, ListItemText } from '@material-ui/core';
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Typography, Box, IconButton, CardActions, Paper, MenuList, ListItemText,CircularProgress } from '@material-ui/core';
 import {format} from "timeago.js"
-
+import {Link} from 'react-router-dom'
 
 
 const ViewPost = () => {
@@ -23,7 +23,7 @@ const ViewPost = () => {
     const publicFolder = "http://localhost:5000/Images/"
     const { user, dispatch } = useContext(Context);
     const [curruser, setcurruser] = useState({})
-
+    const [isLoading, setisLoading] = useState(false)
 
 
     useEffect(() => {
@@ -85,11 +85,8 @@ const ViewPost = () => {
             }
             console.log(tmpUser)
             const likedPost = await axios.put(`/post/${post._id}/likepost`,tmpUser);
-            const fetchedUser = await axios.get('/user/'+user._id);
-            // console.log(fetchedUser)
-            dispatch({type:'UPDATE',payload:fetchedUser.data});
-            // console.log(fetchedUser)
-
+            const fetchedUser = await axios.get('/user/'+user._id);        
+            dispatch({type:'UPDATE',payload:fetchedUser.data});        
             setIsLiked(!isLiked)
         } catch (err) {
 
@@ -111,23 +108,16 @@ const ViewPost = () => {
     }
 
     
-    const handleLikedBy = async() => {
-        try{
-            window.location.replace("/likedBy/"+post._id)
-        }catch(err){
-
-        }
-    }
+    
     
     const handleDelete = async() => {
-        console.log(postId)
+        setisLoading(true)
         try{
-            console.log("above")
             const comments = await axios.delete(`/comment/${postId}/deleteAll`)
             const post123 = await axios.delete(`/post/${postId}/${user._id}`)
             const fetchedUser = await axios.get('/user/'+user._id);
             dispatch({type:'UPDATE',payload:fetchedUser.data});
-            window.location.replace('/home')
+            window.location.href="/userProfile/"+user._id
         }catch(err){
 
         }
@@ -146,7 +136,6 @@ const ViewPost = () => {
 
         <>
             <NavbarHome />
-
             <div className="viewpost_container">
                 <Card >
                 <div className="post_header">
@@ -162,13 +151,14 @@ const ViewPost = () => {
                             subheader={curruser.name}
                         />
                     </div>
-                    {(post.userId == user._id) && <button className="Post_delete" onClick={handleDelete} ><i className="fas fa-trash Post_delete_icon"></i></button>} 
+                    {(post.userId == user._id) && <button className="Post_delete" onClick={handleDelete} >{isLoading?<CircularProgress/>:<i className="fas fa-trash Post_delete_icon"></i>}</button>} 
                 
                 </div>
                     <CardMedia
                         component="img"
                         image={publicFolder + post.photo}
                         height="250"
+                        alt="Loading.."
                         width="400"
                     />
                     <CardContent>
@@ -179,7 +169,7 @@ const ViewPost = () => {
                         </Box>
                     </CardContent>
                     <div className="Post_likedby">
-                        <Button onClick={handleLikedBy}> View LikedBy </Button>
+                        <Link className="link" to={`/likedBy/${post._id}`}><Button> View LikedBy </Button></Link>
                     </div>
                     <CardActions>
                         <div>
@@ -199,9 +189,11 @@ const ViewPost = () => {
                                 <>
                                     <div className='viewpost_comments'>
                                         <Comment comment={com} />
-                                        <button style={{ padding: "0", border: "none" }} onClick={() => DeleteComment(com)} >
-                                            <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
-                                        </button>
+                                        {   com.userId == user._id && 
+                                            <button style={{ padding: "0", border: "none" }} onClick={() => DeleteComment(com)} >
+                                                <Tooltip title="Delete comment"><i className="viewpost_delete_icon fas fa-window-close"  ></i></Tooltip>
+                                            </button>
+                                        }
                                     </div>
                                     <hr />
                                 </>
@@ -216,9 +208,6 @@ const ViewPost = () => {
                     </div>
                 </div>
             </div>
-
-
-
         </>
 
 
